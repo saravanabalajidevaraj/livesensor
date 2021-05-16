@@ -1,0 +1,7 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <app-cs-search #reportSearch [hidden]="!isSearch" [url]="url" (reportSelect)="viewReport($event)"></app-cs-search>
+        <app-cs-report [hidden]="isSearch" [url]="url" [isEdit]="isEdit" [isApprove]="isApprove" [report]="report"
+            (editReport)="editReport()" (openSearch)="viewSearch()" (triggerRefresh)="triggerFetch()"></app-cs-report>
+    </div>
+</section>

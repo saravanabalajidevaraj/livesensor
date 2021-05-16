@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-sm-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading text-center">
+                <label class="panel-title">Training</label>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label class="col-sm-2 control-label text-left">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control rounded" [(ngModel)]="report.title" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label class="col-sm-2 control-label text-left">Details</label>
+                            <div class="col-sm-10">
+                                <textarea type="text" class="form-control rounded" [(ngModel)]="report.details" [readonly]="!isEdit"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label class="col-sm-2 control-label text-left">Location</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control rounded" [(ngModel)]="report.location" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label class="col-sm-2 control-label text-left">Date</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control rounded" [value]="date()" (change)="updateDate($event.target.value)" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <label class="col-sm-2 control-label text-left">Time</label>
+                            <div class="col-sm-10 no-padding">
+                                <label class="col-sm-2 control-label text-left">From:</label>
+                                <div class="col-sm-4">
+                                    <input type="time" [value]="fromTime()" (change)="updateFromTime($event.target.value)" class="form-control rounded" [readonly]="!isEdit">
+                                </div>
+                                <label class="col-sm-2 control-label text-left">To:</label>
+                                <div class="col-sm-4">
+                                    <input type="time" [value]="toTime()" (change)="updateToTime($event.target.value)" class="form-control rounded" [readonly]="!isEdit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li class="previous"><a (click)="back()">Back</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

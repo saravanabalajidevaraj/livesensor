@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+
+    <!-- START @HEAD -->
+    <head>
+        <!-- START @META SECTION -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Live Sensor Security</title>
+        <!--/ END META SECTION -->
+
+        <!-- START @FONT STYLES -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Oswald:700,400" rel="stylesheet">
+        <!--/ END FONT STYLES -->
+
+        <!-- START @GLOBAL MANDATORY STYLES -->
+        <link href="../../../assets/global/plugins/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!--/ END GLOBAL MANDATORY STYLES -->
+
+        <!-- START @PAGE LEVEL STYLES -->
+        <link href="../../../assets/global/plugins/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/animate.css/animate.min.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/bootstrap-fileupload/css/bootstrap-fileupload.min.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/chosen_v1.2.0/chosen.min.css" rel="stylesheet">
+        <!--/ END PAGE LEVEL STYLES -->
+        <!-- START @PAGE LEVEL STYLES -->
+        <link href="../../../assets/global/plugins/bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/animate.css/animate.min.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/datatables/css/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/datatables/css/datatables.responsive.css" rel="stylesheet">
+        <link href="../../../assets/global/plugins/bower_components/fuelux/dist/css/fuelux.min.css" rel="stylesheet">
+        <!--/ END PAGE LEVEL STYLES -->
+
+        <!-- START @THEME STYLES -->
+        <link href="../../../assets/admin/css/reset.css" rel="stylesheet">
+        <link href="../../../assets/admin/css/layout.css" rel="stylesheet">
+        <link href="../../../assets/admin/css/components.css" rel="stylesheet">
+        <link href="../../../assets/admin/css/plugins.css" rel="stylesheet">
+        <link href="../../../assets/admin/css/themes/default.theme.css" rel="stylesheet" id="theme">
+        <link href="../../../assets/admin/css/custom.css" rel="stylesheet">
+        <!--/ END THEME STYLES -->
+    </head>
+    <!--/ END HEAD -->
+
+    <body>
+        <!-- START @WRAPPER -->
+        <section id="wrapper">
+
+            <!-- START @HEADER -->
+            <header id="header">
+
+                <!-- Start header left -->
+                <div class="header-left">
+                    <!-- Start offcanvas left: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                    <div class="navbar-minimize-mobile left">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <!--/ End offcanvas left -->
+
+                    <!-- Start navbar header -->
+                    <div class="navbar-header">
+
+                         <!-- Start brand -->
+                         <a class="navbar-brand" href="dashboard.html">
+                                <img class="logo" src="" alt="Brand Logo">
+                        </a><!-- /.navbar-brand -->
+                        <!--/ End brand -->
+
+                    </div><!-- /.navbar-header -->
+                    <!--/ End navbar header -->
+
+                    <!-- Start offcanvas right: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                    <div class="navbar-minimize-mobile right">
+                        <i class="fa fa-cog"></i>
+                    </div>
+                    <!--/ End offcanvas right -->
+
+                    <div class="clearfix"></div>
+                </div><!-- /.header-left -->
+                <!--/ End header left -->
+
+                <!-- Start header right -->
+                <div class="header-right">
+                    <!-- Start navbar toolbar -->
+                    <div class="navbar navbar-toolbar">
+
+                        <!-- Start left navigation -->
+                        <ul class="nav navbar-nav navbar-left">
+
+                            <!-- Start sidebar shrink -->
+                            <li class="navbar-minimize">
+                                <a href="javascript:void(0);" title="Minimize sidebar">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                            </li>
+                            <!--/ End sidebar shrink -->
+
+
+                        </ul><!-- /.navbar-left -->
+                        <!--/ End left navigation -->
+
+                        <!-- Start right navigation -->
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <!-- Start notifications -->
+                            <li class="dropdown navbar-notification">
+
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i><span class="rounded count label label-danger">6</span></a>
+
+                                <!-- Start dropdown menu -->
+                                <div class="dropdown-menu animated flipInX">
+                                    <div class="dropdown-header">
+                                        <span class="title">Notifications <strong>(6)</strong></span>
+                                    </div>
+                                    <div class="dropdown-body niceScroll">
+
+                                        <!-- Start notification list -->
+                                        <div class="media-list small">
+
+                                            <a href="#" class="media">
+                                                    <div class="media-object pull-left"><i class="fa fa-cogs fg-success"></i></div>
+                                                    <div class="media-body">
+                                                        <span class="media-text">Incident Report is submitted by xyz, please review</span>
+                                                    </div><!-- /.media-body -->
+                                            </a><!-- /.media -->
+
+                                            <a href="#" class="media">
+                                                <div class="media-object pull-left"><i class="fa fa-cogs fg-success"></i></div>
+                                                <div class="media-body">
+                                                    <span class="media-text">Fire Drill Report is submitted by xyz, please review</span>
+                                                </div><!-- /.media-body -->
+                                            </a><!-- /.media -->
+
+                                            <a href="#" class="media">
+                                                <div class="media-object pull-left"><i class="fa fa-cogs fg-success"></i></div>
+                                                <div class="media-body">
+                                                    <span class="media-text">Training XYZ is pending, please complete</span>
+                                                </div><!-- /.media-body -->
+                                            </a><!-- /.media -->
+
+                                            <a href="#" class="media">
+                                                <div class="media-object pull-left"><i class="fa fa-cogs fg-success"></i></div>
+                                                <div class="media-body">
+                                                    <span class="media-text">Training XYZ is pending, please complete</span>
+                                                </div><!-- /.media-body -->
+                                            </a><!-- /.media -->
+
+                                        </div>
+                                        <!--/ End notification list -->
+
+                                    </div>
+                                    <div class="dropdown-footer">
+                                        <a href="#">See All</a>
+                                    </div>
+                                </div>
+                                <!--/ End dropdown menu -->
+
+                            </li><!-- /.navbar-notification -->
+                            <!--/ End notifications -->
+
+                            <!-- Start profile -->
+                            <li class="dropdown navbar-profile">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span class="meta">
+                                        <span class="avatar"><img src="photo.jpg" class="img-circle" alt="admin"></span>
+                                        <span class="text hidden-xs hidden-sm text-muted">Madhulika Singh</span>
+                                        <span class="caret"></span>
+                                    </span>
+                                </a>
+                                <!-- Start dropdown menu -->
+                                <ul class="dropdown-menu animated flipInX">
+                                    <li class="dropdown-header">Account</li>
+                                    <li><a href="page-profile.html"><i class="fa fa-user"></i>View profile</a></li>                                   
+                                    <li><a href="#"><i class="fa fa-upload"></i>Upload Photo</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="sign-in.html"><i class="fa fa-sign-out"></i>Logout</a></li>
+                                </ul>
+                                <!--/ End dropdown menu -->
+                            </li><!-- /.navbar-profile -->
+                            <!--/ End profile -->
+
+                        </ul><!-- /.navbar-right -->
+                        <!--/ End right navigation -->
+
+                    </div><!-- /.navbar-toolbar -->
+                    <!--/ End navbar toolbar -->
+                </div><!-- /.header-right -->
+                <!--/ End header left -->
+
+            </header> <!-- /#header -->
+            <!--/ END HEADER -->
+
+            <aside id="sidebar-left" class="sidebar-circle">
+
+                <!-- Start left navigation - profile shortcut -->
+                <div class="sidebar-content">
+                    <div class="media">
+                        <div class="media-body">
+                            <h4 class="media-heading">Hello, <span>Madhulika Singh</span></h4>
+                            <small>Product Owner</small>
+                        </div>
+                    </div>
+                </div><!-- /.sidebar-content -->
+                <!--/ End left navigation -  profile shortcut -->
+
+                <!-- Start left navigation - menu -->
+                <ul class="sidebar-menu">
+
+                    <!-- Start category Modules -->
+                    <li class="sidebar-category">
+                            <span></span><span class="hidden-sidebar-minimize">Modules</span> 
+                            <span class="pull-right"><i class="fa fa-coffee"></i></span>
+                    </li>
+                        <!--/ End category Modules -->
+
+                    <!-- Start navigation - Organization Pages -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Organization</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="">Overview</a></li>
+                            <li><a href="">Awards & Achievements</a></li>
+                            <li><a href="">Client Appreciation Letters</a></li>
+                            <li><a href="">Grading Status</a></li>
+                            <li><a href="">Organization Chart</a></li>
+                            <li><a href="">Activities</a></li>
+                            <li><a href="">Special Announcements</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - Organization Pages -->
+
+                    <!-- Start navigation - Employee Management -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Employee Management</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="add-employee.html">Add Employee</a></li>
+                            <li><a href="dashboard-employee.html">Employee Dashboard</a></li>
+                            <li><a href="attendance-reports.html">Attendance Report</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - Employee Management -->
+
+                    <!-- Start navigation - Site Management -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Site Management</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="add-site.html">Add Site</a></li>
+                            <li><a href="dashboard-site.html">Site Dashboard</a></li>
+                            <li><a href="sitevisit-reports.html">Site Visit Report</a></li>
+                            <li><a href="clientsatisfactory-reports.html">Client Satisfactory Report</a></li>
+                            <li><a href="clocking-reports.html">Clocking Report</a></li>
+                            <li><a href="occurrencebook-reports.html">Occurrence Book</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - Site Management -->
+
+                    <!-- Start navigation - Deployment Management -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Deployment Chart</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="add-deploymentchart.html">Add Deployment Chart</a></li>
+                            <li><a href="dashboard-deploymentchart.html">Deployment Dashboard</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - Deployment Management -->
+
+                    <!-- Start navigation - Reports -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Reports</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="lostandfound-reports.html">Lost & Found</a></li>
+                            <li><a href="incidentreport-reports.html">Incident Report</a></li>
+                            <li><a href="firedrill-reports.html">Fire Drill</a></li>
+                            <li><a href="handingandtakingover-reports.html">Daily Handing & Taking Over</a></li>
+                            <li><a href="afteractionreview-reports.html">After Action Review</a></li>
+                            <li><a href="shiftsupervisorchecklist-reports.html">Shift Supervisor Checklist</a></li>
+                            <li><a href="refreshertraining-reports.html">Refresher Training</a></li>
+                            <li><a href="operationvisit-reports.html">Operation Visit</a></li>
+                            <li><a href="onjobtraining-reports.html">On Job Training</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - Reports -->
+
+                    <!-- Start navigation - HR Bay -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">HR Bay</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="add-employee.html">Salary Management</a></li>
+                            <li><a href="employee-list.html">Leave Management</a></li>
+                            <li><a href="employee-list.html">E Learning</a></li>
+                            <li><a href="employee-list.html">Training</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - HR Bay -->
+
+                    <!-- Start navigation - Admin Bay -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-home"></i></span>
+                            <span class="text">Admin Bay</span>
+                            <span class="arrow"></span>
+                        </a>
+                        <ul>
+                            <li><a href="mapping-approle.html">APP Role Mapping</a></li>
+                            <li><a href="mapping-gradeToJD.html">Grade To JD Mapping</a></li>
+                            <li><a href="mapping-subordinates.html">Subordinates Mapping</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation - Admin Bay -->
+
+                    <!-- Start category documentation -->
+                    <li class="sidebar-category">
+                        <span></span><span class="hidden-sidebar-minimize">Documentation</span> 
+                        <span class="pull-right"><i class="fa fa-coffee"></i></span>
+                    </li>
+                    <!--/ End category documentation -->
+
+                    <!-- Start documentation - api documentation -->
+                    <li>
+                        <a href="readme.html" target="_blank">
+                            <span class="icon"><i class="fa fa-book"></i></span>
+                            <span class="text">Read Me !!</span>
+                        </a>
+                    </li>
+                    <!--/ End documentation - api documentation -->
+
+                </ul><!-- /.sidebar-menu -->
+                <!--/ End left navigation - menu -->
+
+                <!-- Start left navigation - footer -->
+                <div class="sidebar-footer hidden-xs hidden-sm hidden-md">
+                    <a id="setting" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Setting"><i class="fa fa-cog"></i></a>
+                    <a id="fullscreen" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Fullscreen"><i class="fa fa-desktop"></i></a>
+                    <a id="lock-screen" data-url="page-signin.html" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Lock Screen"><i class="fa fa-lock"></i></a>
+                    <a id="logout" data-url="page-lock-screen.html" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Logout"><i class="fa fa-power-off"></i></a>
+                </div><!-- /.sidebar-footer -->
+                <!--/ End left navigation - footer -->
+
+            </aside><!-- /#sidebar-left -->
+            <!--/ END SIDEBAR LEFT -->
+
+            <!-- START @PAGE CONTENT -->
+            <section id="page-content">
+
+                <!-- Start body content -->
+                <div class="body-content animated fadeIn">
+                    <div class="row">
+                        <div class="col-md-2">   
+                        </div>
+                        <div class="col-md-8">
+
+                        <!-- Start staff details -->
+                        <div class="panel rounded shadow no-overflow">
+                                <div class="row">
+                                        <div class="col-md-12">
+                
+                                            <!-- Start progress bar wizard -->
+                                            <div id="progress-wizard">
+                                                <div class="panel panel-tab rounded shadow">
+                
+                                                    <!-- Start tabs heading -->
+                                                    <div class="panel-heading no-padding">
+                                                        <ul class="nav nav-tabs">
+                                                            <li class="active">
+                                                                <a href="#tab1" data-toggle="tab">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <div>
+                                                                        <span class="text-strong">Mobile App Roles</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#tab2" data-toggle="tab">
+                                                                    <i class="fa fa-check-circle"></i>
+                                                                    <div>
+                                                                        <span class="text-strong">Web App Roles</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div><!-- /.panel-heading -->
+                                                    <!--/ End tabs heading -->
+                
+                                                    <div class="panel-sub-heading">
+                                                        <div class="inner-all">
+                                                            <div class="progress progress-striped active no-margin progress-xs">
+                                                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.panel-sub-heading -->
+                
+                                                    <!-- Start tabs content -->
+                                                    <div class="panel-body">
+                                                        <form action="#" class="tab-content form-horizontal">
+                                                            <div class="tab-pane fade in active inner-all" id="tab1">
+                                                                <div class="panel-body">
+                                                                        <div class="col-sm-4 search input-group">
+                                                                                <input type="search" class="form-control rounded" placeholder="Search"/>
+                                                                                <span class="input-group-btn">
+                                                                                <button class="btn btn-default" type="button">
+                                                                                    <span class="glyphicon glyphicon-search"></span>
+                                                                                    <span class="sr-only">Search</span>
+                                                                                </button>
+                                                                                </span>
+                                                                            </div>
+                                                                    
+                                                                        <div >
+                                                                            <table class="table" data-container="true">
+                                                                                <thead>
+                                                                                    <tr data-container="true">
+                                                                                        <th>Officer Name</th>
+                                                                                        <th>Role</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody data-container="true">
+                                                                                    <tr data-container="true">
+                                                                                        <td>Tan Ah Meng</td>
+                                                                                        <td><div>
+                                                                                            <div class="rdio rdio-theme inline mr-10">
+                                                                                                <input checked="checked" id="so" name="radio" type="radio">
+                                                                                                <label for="so">SO</label>
+                                                                                            </div>
+                                                                                            <div class="rdio rdio-theme inline">
+                                                                                                <input id="oe" name="radio" type="radio">
+                                                                                                <label for="oe">OE</label>
+                                                                                            </div>
+                                                                                        </div></td>
+                                                                                    </tr>
+                                                                                    <tr data-container="true">
+                                                                                        <td>John lim</td>
+                                                                                        <td><div>
+                                                                                            <div class="rdio rdio-theme inline mr-10">
+                                                                                                <input checked="checked" id="so" name="radio" type="radio">
+                                                                                                <label for="so">SO</label>
+                                                                                            </div>
+                                                                                            <div class="rdio rdio-theme inline">
+                                                                                                <input id="oe" name="radio" type="radio">
+                                                                                                <label for="oe">OE</label>
+                                                                                            </div>
+                                                                                        </div></td>
+                                                                                    </tr>
+                                                                                    <tr data-container="true">
+                                                                                        <td>David Tan</td>
+                                                                                        <td><div>
+                                                                                            <div class="rdio rdio-theme inline mr-10">
+                                                                                                <input checked="checked" id="so" name="radio" type="radio">
+                                                                                                <label for="so">SO</label>
+                                                                                            </div>
+                                                                                            <div class="rdio rdio-theme inline">
+                                                                                                <input id="oe" name="radio" type="radio">
+                                                                                                <label for="oe">OE</label>
+                                                                                            </div>
+                                                                                        </div></td>
+                                                                                    </tr>
+                                                                                    <tr data-container="true">
+                                                                                        <td>Subramayam</td>
+                                                                                        <td><div>
+                                                                                            <div class="rdio rdio-theme inline mr-10">
+                                                                                                <input checked="checked" id="so" name="radio" type="radio">
+                                                                                                <label for="so">SO</label>
+                                                                                            </div>
+                                                                                            <div class="rdio rdio-theme inline">
+                                                                                                <input id="oe" name="radio" type="radio">
+                                                                                                <label for="oe">OE</label>
+                                                                                            </div>
+                                                                                        </div></td>
+                                                                                    </tr>
+                                                                                    <tr data-container="true">
+                                                                                        <td>Chandra Babu</td>
+                                                                                        <td><div>
+                                                                                            <div class="rdio rdio-theme inline mr-10">
+                                                                                                <input checked="checked" id="so" name="radio" type="radio">
+                                                                                                <label for="so">SO</label>
+                                                                                            </div>
+                                                                                            <div class="rdio rdio-theme inline">
+                                                                                                <input id="oe" name="radio" type="radio">
+                                                                                                <label for="oe">OE</label>
+                                                                                            </div>
+                                                                                        </div></td>
+                                                                                    </tr>
+                                                                                    <tr data-container="true">
+                                                                                        <td>Ross Gallor</td>
+                                                                                        <td><div>
+                                                                                            <div class="rdio rdio-theme inline mr-10">
+                                                                                                <input checked="checked" id="so" name="radio" type="radio">
+                                                                                                <label for="so">SO</label>
+                                                                                            </div>
+                                                                                            <div class="rdio rdio-theme inline">
+                                                                                                <input id="oe" name="radio" type="radio">
+                                                                                                <label for="oe">OE</label>
+                                                                                            </div>
+                                                                                        </div></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    
+                                                                <!--/ End repeater -->
+                                                            </div>
+                                                            </div>
+                                                            <div class="tab-pane fade inner-all" id="tab2">
+                                                                <div class="panel-body">
+                                                                        <div class="col-sm-4 search input-group">
+                                                                                <input type="search" class="form-control rounded" placeholder="Search"/>
+                                                                                <span class="input-group-btn">
+                                                                                <button class="btn btn-default" type="button">
+                                                                                    <span class="glyphicon glyphicon-search"></span>
+                                                                                    <span class="sr-only">Search</span>
+                                                                                </button>
+                                                                                </span>
+                                                                            </div>
+                                                                       
+                                                                            <div >
+                                                                                <table class="table" data-container="true">
+                                                                                    <thead>
+                                                                                        <tr data-container="true">
+                                                                                            <th>Officer Name</th>
+                                                                                            <th>Role</th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody data-container="true">
+                                                                                        <tr data-container="true">
+                                                                                            <td>Tan Ah Meng</td>
+                                                                                            <td><select data-placeholder="Choose The Site Name" class="chosen-select" tabindex="2">
+                                                                                                <option value="employee">Employee</option>
+                                                                                                <option value="manager">Manager</option>
+                                                                                                <option value="hr">HR</option>
+                                                                                                <option value="admin">Admin</option>
+                                                                                            </select></td>
+                                                                                        </tr>
+                                                                                        <tr data-container="true">
+                                                                                            <td>John lim</td>
+                                                                                            <td><select data-placeholder="Choose The Site Name" class="chosen-select" tabindex="1">
+                                                                                                <option value="employee">Employee</option>
+                                                                                                <option value="manager">Manager</option>
+                                                                                                <option value="hr">HR</option>
+                                                                                                <option value="admin">Admin</option>
+                                                                                            </select></td>
+                                                                                        </tr>
+                                                                                        <tr data-container="true">
+                                                                                            <td>David Tan</td>
+                                                                                            <td><select data-placeholder="Choose The Site Name" class="chosen-select" tabindex="2">
+                                                                                                <option value="employee">Employee</option>
+                                                                                                <option value="manager">Manager</option>
+                                                                                                <option value="hr">HR</option>
+                                                                                                <option value="admin">Admin</option>
+                                                                                            </select></td>
+                                                                                        </tr>
+                                                                                        <tr data-container="true">
+                                                                                            <td>Chandra Babu</td>
+                                                                                            <td><select data-placeholder="Choose The Site Name" class="chosen-select" tabindex="2">
+                                                                                                <option value="employee">Employee</option>
+                                                                                                <option value="manager">Manager</option>
+                                                                                                <option value="hr">HR</option>
+                                                                                                <option value="admin">Admin</option>
+                                                                                            </select></td>
+                                                                                        </tr>
+                                                                                        <tr data-container="true">
+                                                                                            <td>Subramanyam</td>
+                                                                                            <td><select data-placeholder="Choose The Site Name" class="chosen-select" tabindex="1">
+                                                                                                <option value="employee">Employee</option>
+                                                                                                <option value="manager">Manager</option>
+                                                                                                <option value="hr">HR</option>
+                                                                                                <option value="admin">Admin</option>
+                                                                                            </select></td>
+                                                                                        </tr>
+                                                                                        <tr data-container="true">
+                                                                                            <td>Ross Gallor</td>
+                                                                                            <td><select data-placeholder="Choose The Site Name" class="chosen-select" tabindex="2">
+                                                                                                <option value="employee">Employee</option>
+                                                                                                <option value="manager">Manager</option>
+                                                                                                <option value="hr">HR</option>
+                                                                                                <option value="admin">Admin</option>
+                                                                                            </select></td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        
+                                                                    <!--/ End repeater -->
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div><!-- /.panel-body -->
+                                                    <!--/ End tabs content -->
+                
+                                                    <!-- Start pager -->
+                                                    <div class="panel-footer">
+                                                        <ul class="pager wizard no-margin">
+                                                            <li class="previous"><a href="javascript:void(0);">Previous</a></li>
+                                                            <li class="next"><a href="javascript:void(0);">Next</a></li>
+                                                        </ul>
+                                                    </div><!-- /.panel-footer -->
+                                                    <!--/ End pager -->
+                
+                                                </div>
+                                            </div><!-- /#progress-wizard -->
+                                            <!--/ End progress bar wizard-->
+                
+                                        </div>
+                                    </div><!-- /.row -->
+                            </div>
+                            <!--/ End staff details -->
+
+                        </div>
+                        <div class="col-md-2">   
+                        </div>
+                    </div><!-- /.row -->
+
+                </div><!-- /.body-content -->
+                <!--/ End body content -->
+
+            </section><!-- /#page-content -->
+            <!--/ END PAGE CONTENT -->
+
+        </section><!-- /#wrapper -->
+        <!--/ END WRAPPER -->
+
+
+
+        <!-- START JAVASCRIPT SECTION (Load javascripts at bottom to reduce load time) -->
+        <!-- START @CORE PLUGINS -->
+        <script src="../../../assets/global/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/jquery-cookie/jquery.cookie.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/typehead.js/dist/handlebars.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/typehead.js/dist/typeahead.bundle.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/jquery-nicescroll/jquery.nicescroll.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/jquery.sparkline.min/index.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/jquery-easing-original/jquery.easing.1.3.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/ionsound/js/ion.sound.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/bootbox/bootbox.js"></script>
+        <!--/ END CORE PLUGINS -->
+
+        <!-- START @PAGE LEVEL PLUGINS -->
+        <script src="../../../assets/global/plugins/bower_components/bootstrap-fileupload/js/bootstrap-fileupload.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/chosen_v1.2.0/chosen.jquery.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/datatables/js/jquery.dataTables.min.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/datatables/js/dataTables.bootstrap.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/datatables/js/datatables.responsive.js"></script>
+        <script src="../../../assets/global/plugins/bower_components/fuelux/dist/js/fuelux.min.js"></script>
+        <!--/ END PAGE LEVEL PLUGINS -->
+
+        <!-- START @PAGE LEVEL SCRIPTS -->
+        <script src="../../../assets/admin/js/apps.js"></script>
+        <script src="../../../assets/admin/js/pages/blankon.form.layout.js"></script>
+        <script src="../../../assets/admin/js/pages/blankon.form.picker.js"></script>
+        <script src="../../../assets/admin/js/pages/blankon.table.js"></script>
+        <script src="../../../assets/admin/js/demo.js"></script>
+        <!--/ END PAGE LEVEL SCRIPTS -->
+
+                <!-- START @PAGE LEVEL PLUGINS -->
+                <script src="../../../assets/global/plugins/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+                <script src="../../../assets/global/plugins/bower_components/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+                <script src="../../../assets/global/plugins/bower_components/bootstrap-datepicker-vitalets/js/bootstrap-datepicker.js"></script>
+                <!--/ END PAGE LEVEL PLUGINS -->
+        
+                <!-- START @PAGE LEVEL SCRIPTS -->
+                
+                <script src="../../../assets/admin/js/pages/blankon.form.wizard.js"></script>
+                
+                <!--/ END PAGE LEVEL SCRIPTS -->
+        <!--/ END JAVASCRIPT SECTION -->
+        
+
+    </body>
+    <!--/ END BODY -->
+
+</html>

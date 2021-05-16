@@ -1,0 +1,49 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6 text-center report-title">Vacation Balance</div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control rounded" (input)="filter($event.target.value)">
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body no-padding">
+                <table class="table table-bordered table-middle table-lilac">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th *ngFor="let x of types" style="width: 10%">{{x.description}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-template ngFor let-x [ngForOf]="userIds">
+                            <tr *ngIf="balance.has(x)">
+                                <td>{{userName(x)}}</td>
+                                <td *ngFor="let type of types">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control rounded" [min]="getUsed(x, type.code)" (input)="setAssigned(x, type.code, $event.target.value)" [value]="getAssigned(x, type.code)">
+                                        <span class="input-group-addon" style="min-width: 20px; padding: 0px;">{{getAssigned(x, type.code) - getUsed(x, type.code)}}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+            <div [class]="['panel panel-footer' + (resetConfirm ? ' bg-warning' : '')]">
+                <ul *ngIf="!resetConfirm" class="pager wizard no-margin">
+                    <li class="previous"><a (click)="resetConfirm = true">Reset</a></li>
+                    <li class="next"><a (click)="submit()">Submit</a></li>
+                </ul>
+                <ul *ngIf="resetConfirm" class="pager wizard no-margin">
+                    <li><h4><strong>Are you sure you want to reset vacation balance?</strong></h4></li>
+                    <li class="previous"><a (click)="resetConfirm = false">Deny</a></li>
+                    <li class="next"><a (click)="reset()">Confirm</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

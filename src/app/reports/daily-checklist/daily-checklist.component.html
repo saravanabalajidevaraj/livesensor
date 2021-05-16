@@ -1,0 +1,7 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <app-dc-search #reportSearch [hidden]="!isSearch" [url]="url" (reportSelect)="viewReport($event)"></app-dc-search>
+        <app-dc-report [hidden]="isSearch" [url]="url" [isEdit]="isEdit" [isApprove]="isApprove" [report]="report"
+            (approveReport)="approveReport()" (editReport)="editReport()" (openSearch)="viewSearch()" (triggerRefresh)="triggerFetch()"></app-dc-report>
+    </div>
+</section>

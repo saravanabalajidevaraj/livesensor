@@ -1,0 +1,7 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <app-elr-search #reportSearch [hidden]="!isSearch" [url]="url" [eLearning]="eLearning" (reportSelect)="viewReport($event)"></app-elr-search>
+        <app-elr-report [hidden]="isSearch" [url]="url" [isEdit]="isEdit" [isApprove]="isApprove" [eLearning]="eLearning" [report]="report"
+            (approveReport)="approveReport()" (editReport)="editReport()" (openSearch)="viewSearch()" (triggerRefresh)="triggerFetch()"></app-elr-report>
+    </div>
+</section>

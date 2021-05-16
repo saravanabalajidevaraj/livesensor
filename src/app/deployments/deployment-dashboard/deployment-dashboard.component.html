@@ -1,0 +1,241 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label text-left">Site:</label>
+                        <div class="col-sm-4">
+                            <select #siteSelect class="form-control rounded" (change)="fetchDeployment(dateSelect.value, siteSelect.value)">
+                                <option value="" disabled>Please Select</option>
+                                <option *ngFor="let x of sites" [value]="x._id">{{x.siteName}}</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label text-left">Date:</label>
+                        <div class="col-sm-4">
+                            <input #dateSelect type="date" [value]="today" (change)="fetchDeployment(dateSelect.value, siteSelect.value)" class="form-control rounded">
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!!deployment" id="accordion-group" class="panel-group rounded shadow">
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#specifications">
+                                    Site Specifications
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="specifications" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Address</label>
+                                        <div class="col-sm-7">
+                                            <span *ngIf="site && site.address">{{site.address}}</span>
+                                            <span *ngIf="!site || !site.address">N/A</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Job Scope</label>
+                                        <div class="col-sm-7">
+                                            <div *ngIf="site && site.jobScope.length"><div *ngFor="let x of site.jobScope">{{x}}</div></div>
+                                            <span *ngIf="!site || !site.jobScope.length">N/A</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Job Scope Document</label>
+                                        <div class="col-sm-7">
+                                            <button *ngIf="site && site.jobScopeDocId" class="btn btn-primary" (click)="downloadDoc()">Download</button>
+                                            <span *ngIf="!site || !site.jobScopeDocId">N/A</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#am-deployment">
+                                    AM Shift Deploment
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="am-deployment" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div [class]="['form-group' + (amBreakError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Break Time</label>
+                                        <div class="col-sm-7">
+                                            <label class="col-sm-2 control-label">From:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control rounded" (change)="deployment.amShiftDeployment.breakTime.from = $event.target.value" [disabled]="!isEdit">
+                                                    <option *ngFor="let x of timeOptions" [value]="x" [selected]="deployment.amShiftDeployment.breakTime.from === x">{{x}}</option>
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-2 control-label">To:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control rounded" (change)="deployment.amShiftDeployment.breakTime.to = $event.target.value" [disabled]="!isEdit">
+                                                    <option *ngFor="let x of timeOptions" [value]="x" [selected]="deployment.amShiftDeployment.breakTime.to === x">{{x}}</option>
+                                                </select>
+                                            </div>
+                                            <div *ngIf="amBreakError" class="col-sm-12 text-right"><code>{{amBreakError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Remarks</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="deployment.amShiftDeployment.remarks" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-middle table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th><label>Officer</label></th>
+                                                        <th><label>Grade</label></th>
+                                                        <th><label>Description</label></th>
+                                                        <th><label>OJT Training</label></th>
+                                                        <th><label>Standby</label></th>
+                                                        <th><button class="btn btn-primary" (click)="amPending = true; pmPending = false" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of deployment.amShiftDeployment.officers; index as i">
+                                                        <td>{{displayName(x.id)}}</td>
+                                                        <td>{{userGrade(x.id)}}</td>
+                                                        <td><input type="text" [(ngModel)]="deployment.amShiftDeployment.officers[i].description" class="form-control rounded" [readonly]="!isEdit"></td>
+                                                        <td>{{userTraining(x.id)}}</td>
+                                                        <td>
+                                                            <div class="ckbox ckbox-theme">
+                                                                <input [id]="['am-ckbox-' + i]" type="checkbox" [(ngModel)]="deployment.amShiftDeployment.officers[i].onStandBy" [disabled]="!isEdit">
+                                                                <label [for]="['am-ckbox-' + i]"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td><button class="btn btn-danger" (click)="userRemove(deployment.amShiftDeployment.officers, i)" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                    <tr *ngIf="amPending">
+                                                        <td colspan="5">
+                                                            <select class="form-control rounded" (change)="userSelect(deployment.amShiftDeployment.officers, $event.target.value)" [disabled]="!isEdit">
+                                                                <option value="" disabled>Please Select</option>
+                                                                <option *ngFor="let x of soUsers" [value]="x">{{userName(x)}}</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><button class="btn btn-danger" (click)="amPending = false" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#pm-deployment">
+                                    PM Shift Deploment
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="pm-deployment" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div [class]="['form-group' + (pmBreakError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Break Time</label>
+                                        <div class="col-sm-7 no-padding">
+                                            <label class="col-sm-2 control-label">From:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control rounded" (change)="deployment.pmShiftDeployment.breakTime.from = $event.target.value" [disabled]="!isEdit">
+                                                    <option *ngFor="let x of timeOptions" [value]="x" [selected]="deployment.pmShiftDeployment.breakTime.from === x">{{x}}</option>
+                                                </select>
+                                            </div>
+                                            <label class="col-sm-2 control-label">To:</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control rounded" (change)="deployment.pmShiftDeployment.breakTime.to = $event.target.value" [disabled]="!isEdit">
+                                                    <option *ngFor="let x of timeOptions" [value]="x" [selected]="deployment.pmShiftDeployment.breakTime.to === x">{{x}}</option>
+                                                </select>
+                                            </div>
+                                            <div *ngIf="pmBreakError" class="col-sm-12 text-right"><code>{{pmBreakError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Remarks</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="deployment.pmShiftDeployment.remarks" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-middle table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th><label>Officer</label></th>
+                                                        <th><label>Grade</label></th>
+                                                        <th><label>Description</label></th>
+                                                        <th><label>OJT Training</label></th>
+                                                        <th><label>Standby</label></th>
+                                                        <th><button class="btn btn-primary" (click)="pmPending = true; amPending = false" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of deployment.pmShiftDeployment.officers; index as i">
+                                                        <td>{{displayName(x.id)}}</td>
+                                                        <td>{{userGrade(x.id)}}</td>
+                                                        <td><input type="text" [(ngModel)]="deployment.pmShiftDeployment.officers[i].description" class="form-control rounded" [readonly]="!isEdit"></td>
+                                                        <td>{{userTraining(x.id)}}</td>
+                                                        <td>
+                                                            <div class="ckbox ckbox-theme">
+                                                                <input [id]="['pm-ckbox-' + i]" type="checkbox" [(ngModel)]="deployment.pmShiftDeployment.officers[i].onStandBy" [disabled]="!isEdit">
+                                                                <label [for]="['pm-ckbox-' + i]"></label>
+                                                            </div>
+                                                        </td>
+                                                        <td><button class="btn btn-danger" (click)="userRemove(deployment.pmShiftDeployment.officers, i)" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                    <tr *ngIf="pmPending">
+                                                        <td colspan="5">
+                                                            <select class="form-control rounded" (change)="userSelect(deployment.pmShiftDeployment.officers, $event.target.value)" [disabled]="!isEdit">
+                                                                <option value="" disabled>Please Select</option>
+                                                                <option *ngFor="let x of soUsers" [value]="x">{{userName(x)}}</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><button class="btn btn-danger" (click)="pmPending = false" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div [class]="['panel panel-footer' + (deleteConfirm ? ' bg-danger' : '')]">
+                        <ul *ngIf="!deleteConfirm" class="pager wizard no-margin">
+                            <li class="previous"><a (click)="deleteConfirm = true">Delete</a></li>
+                            <li *ngIf="!isEdit" class="next"><a (click)="isEdit = true">Edit</a></li>
+                            <li *ngIf="isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                        </ul>
+                        <ul *ngIf="deleteConfirm" class="pager wizard no-margin">
+                            <li><h4><strong>Are you sure you want to delete this deployment?</strong></h4></li>
+                            <li class="previous"><a (click)="deleteConfirm = false">Deny</a></li>
+                            <li class="next"><a (click)="delete()">Confirm</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <label *ngIf="!deployment && site" class="col-sm-12 text-center">{{deploymentMsg}}</label>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>

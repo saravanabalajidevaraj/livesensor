@@ -1,0 +1,12 @@
+.navbar .navbar-profile .meta {
+    height: 44px;
+}
+
+.navbar img {
+    max-height: 48px;
+}
+
+.navbar-toolbar .navbar-right .navbar-profile > a {
+    padding-bottom: 0px !important;
+    padding-top: 4px !important;
+}

@@ -1,0 +1,177 @@
+<aside id="sidebar-left" class="sidebar-circle">
+
+    <!-- Start left navigation - profile shortcut -->
+    <div class="sidebar-content">
+        <div class="media">
+            <div class="media-body">
+                <h4 class="media-heading">Hello, <span>{{user.firstName}} {{user.lastName}}</span></h4>
+                <small>{{designation}}</small>
+            </div>
+        </div>
+    </div><!-- /.sidebar-content -->
+    <!--/ End left navigation -  profile shortcut -->
+
+    <!-- Start left navigation - menu -->
+    <ul class="sidebar-menu">
+
+        <!-- Start category Modules -->
+        <li class="sidebar-category">
+            <span></span>
+            <span class="hidden-sidebar-minimize">Modules</span>
+            <span class="pull-right"><i class="fa fa-coffee"></i></span>
+        </li>
+            <!--/ End category Modules -->
+
+        <!-- Start navigation - Organization Pages -->
+        <li class="submenu">
+            <a>
+                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="text">Organization</span>
+                <span class="arrow"></span>
+            </a>
+            <ul>
+                <li><a [routerLink]="['/overview']">Overview</a></li>
+                <li><a [routerLink]="['/achievements']">Awards & Achievements</a></li>
+                <li><a [routerLink]="['/appreciation-letters']">Client Appreciation Letters</a></li>
+                <li><a [routerLink]="['/grading-status']">Grading Status</a></li>
+                <li><a [routerLink]="['/organization-chart']">Organization Chart</a></li>
+                <li *ngIf="false"><a href="">Activities</a></li>
+                <li *ngIf="false"><a href="">Special Announcements</a></li>
+            </ul>
+        </li>
+        <!--/ End navigation - Organization Pages -->
+
+        <!-- Start navigation - Employee Management -->
+        <li class="submenu">
+            <a>
+                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="text">Employee Management</span>
+                <span class="arrow"></span>
+            </a>
+            <ul>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-employee']">Add Employee</a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/dashboard-employee']">Employee Dashboard</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/attendance-report']">Attendance Report</a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/vacation']">Vacations</a></li>
+            </ul>
+        </li>
+        <!--/ End navigation - Employee Management -->
+
+        <!-- Start navigation - Site Management -->
+        <li class="submenu">
+            <a>
+                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="text">Site Management</span>
+                <span class="arrow"></span>
+            </a>
+            <ul>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-site']">Add Site</a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/dashboard-site']">Site Dashboard</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/client-satisfaction']">Client Satisfactory Report</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/clocking-report']">Clocking Report</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/occurrence-book']">Occurrence Book</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/backfill']">Back Fill</a></li>
+            </ul>
+        </li>
+        <!--/ End navigation - Site Management -->
+
+        <!-- Start navigation - Deployment Management -->
+        <li class="submenu">
+            <a>
+                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="text">Deployment Chart</span>
+                <span class="arrow"></span>
+            </a>
+            <ul>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-deployment']">Add Deployment Chart</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/dashboard-deployment']">Deployment Dashboard</a></li>
+            </ul>
+        </li>
+        <!--/ End navigation - Deployment Management -->
+
+        <!-- Start navigation - Reports -->
+        <li class="submenu">
+            <a>
+                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="text">Reports</span>
+                <span class="arrow"></span>
+            </a>
+            <ul>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/after-action-review']">After Action Review</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/daily-checklist']">Daily Checklist</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/fire-incident']">Fire Incident</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/incident-report']">Incident Report</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/job-appraisal']">Job Appraisal</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/lost-and-found']">Lost and Found</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/officer-feedback']">Officer Feedback</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/on-job-training']">On Job Training</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/operation-visit']">Operation Visit</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/performance-evaluation']">Performance Evaluation</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/refresher-training']">Refresher Training</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/shift-supervisor-checklist']">Shift Supervisor Checklist</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/site-visit']">Site Visit</a></li>
+            </ul>
+        </li>
+        <!--/ End navigation - Reports -->
+
+        <!-- Start navigation - HR Bay -->
+        <li class="submenu">
+            <a>
+                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="text">HR Bay</span>
+                <span class="arrow"></span>
+            </a>
+            <ul>
+                <li *ngIf="isAdmin"><a [routerLink]="['/salary-report']">Salary Report</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/salary']">Salary Details</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/holidays']">Public Holidays</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/vacation-report']">Vacation Report</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/vacation-balance']">Vacation Balance</a></li>
+                <li *ngIf="isAdmin" class="submenu">
+                    <a>
+                        <span class="text">E Learning</span>
+                        <span class="arrow fa-angle-double-right"></span>
+                    </a>
+                    <ul>
+                        <li><a [routerLink]="['/create-learning']">Create</a></li>
+                        <li><a [routerLink]="['/learning-report']">Search</a></li>
+                    </ul>
+                </li>
+                <li *ngIf="isAdmin" class="submenu">
+                    <a>
+                        <span class="text">Classroom Training</span>
+                        <span class="arrow fa-angle-double-right"></span>
+                    </a>
+                    <ul>
+                        <li [routerLink]="['/create-training']"><a>Create</a></li>
+                        <li [routerLink]="['/training-report']"><a>Search</a></li>
+                    </ul>
+                </li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/mapping-gradeToJD']">Grade To JD Mapping</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/overtime-report']">Summary Report</a></li>
+            </ul>
+        </li>
+        <!--/ End navigation - HR Bay -->
+
+        <!-- Start category documentation -->
+        <li class="sidebar-category">
+            <span></span>
+            <span class="hidden-sidebar-minimize">Documentation</span>
+            <span class="pull-right"><i class="fa fa-coffee"></i></span>
+        </li>
+        <!--/ End category documentation -->
+
+        <!-- Start documentation - api documentation -->
+        <li>
+            <a [routerLink]="['/readme']">
+                <span class="icon"><i class="fa fa-book"></i></span>
+                <span class="text">Read Me !!</span>
+            </a>
+        </li>
+        <!--/ End documentation - api documentation -->
+
+    </ul><!-- /.sidebar-menu -->
+    <!--/ End left navigation - menu -->
+
+</aside><!-- /#sidebar-left -->
+<!--/ END SIDEBAR LEFT -->

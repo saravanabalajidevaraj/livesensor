@@ -1,0 +1,72 @@
+<div *ngIf="!!report">
+    <div class="panel rounded shadow no-overflow">
+        <div class="panel-heading no-padding">
+            <div class="panel-title row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 text-center report-title">Client Satisfactory</div>
+                <div class="col-sm-2 text-right">
+                    <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="panel-body no-padding">
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6 card">
+                        <div class="card-body">
+                            <h3 class="text-center">Dear Valued Client</h3>
+                            <p class="lead text-center">
+                                We will greatly appreciate it if you would kindly take a few minutes of your time to complete this survey form to help us improve our services.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <br>
+                <div *ngIf="report.itemData && report.itemData.length" class="table-responsive">
+                    <table class="table table-bordered table-middle table-lilac">
+                        <thead>
+                            <tr>
+                                <th>S/No</th>
+                                <th>Item</th>
+                                <th>Selection</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let x of report.itemData; index as i" class="border-warning">
+                                <td>{{i + 1}}</td>
+                                <td>{{x.item}}</td>
+                                <td><input type="text" class="form-control rounded" [value]="x.selection" readonly="true"></td>
+                                <td><input type="text" class="form-control rounded" [value]="x.note" readonly="true"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br>
+                <div *ngIf="report.comments.length" class="table-responsive">
+                    <table class="table table-bordered table-middle">
+                        <thead>
+                            <tr>
+                                <th>Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let x of report.comments; index as i">
+                                <td><input type="text" class="form-control rounded" [value]="x" readonly="true"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+                <div *ngIf="!report.comments.length" class="text-center">N/A</div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <ul class="pager wizard no-margin">
+                <li class="previous"><a (click)="back()">Back</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">Vacations</div>
+                </div>
+            </div>
+            <div class="panel-body no-padding">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-middle table-lilac">
+                        <thead>
+                            <tr>
+                                <th>S/No</th>
+                                <th>Employee</th>
+                                <th>Reviewer</th>
+                                <th>Status</th>
+                                <th>Action On</th>
+                                <th>Type</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let x of reports; index as i" class="border-warning">
+                                <td>{{i + 1}}</td>
+                                <td>{{userName(x.employeeId)}}</td>
+                                <td>{{userName(x.approverId)}}</td>
+                                <td>{{x.status || 'PENDING'}}</td>
+                                <td>{{ x.dateCreated | date : 'yyyy/MM/dd' }}</td>
+                                <td>{{vacationType(x.leaveTypeCode)}}</td>
+                                <td>{{x.duration}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+</div>

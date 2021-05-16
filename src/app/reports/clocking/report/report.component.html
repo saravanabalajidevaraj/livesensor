@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">Clocking Report</div>
+                    <div class="col-sm-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">Site</label>
+                        <div class="col-sm-7">{{siteName(report.siteId)}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">Plan Time</label>
+                        <div class="col-sm-7">{{report.planTime}}</div>
+                    </div>
+                    <div id="checkpoints" class="panel-group rounded shadow">
+                        <div *ngFor="let x of points | keyvalue; index as i" [class]="['panel panel-' + (clockingResult(x.key) ? 'default' : 'warning')]">
+                            <div class="panel-heading no-border">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#checkpoints" [href]="['#checkpoint-' + i]">
+                                        Checkpoint {{i + 1}}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div *ngIf="clockingResult(x.key)" [id]="['checkpoint-' + i]" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">Checkpoint Name</label>
+                                        <div class="col-sm-7">{{x.value.qrData.contents}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Clocking Time</label>
+                                        <div class="col-sm-7 no-padding">
+                                            <div class="col-sm-6">
+                                                <input type="date" class="form-control rounded" (change)="updateDate(x.key, $event.target.value)"  [value]="date(x.key)" [readonly]="!isEdit">
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input type="time" class="form-control rounded" (change)="updateTime(x.key, $event.target.value)" [value]="time(x.key)" [readonly]="!isEdit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">Officer</label>
+                                        <div class="col-sm-7">{{user(x.key)}}</div>
+                                    </div>
+                                    <div *ngIf="reason(x.key)">
+                                        <div class="form-group">
+                                            <div class="col-sm-1"></div>
+                                            <label class="col-sm-3 control-label text-left">Attachment</label>
+                                            <div class="col-sm-7">
+                                                <img class="well" [src]="imageFor(imageId(x.key))" (click)="parseImage(imageId(x.key))">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-1"></div>
+                                            <label class="col-sm-3">Reason</label>
+                                            <div class="col-sm-7">{{reason(x.key)}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Remarks</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" class="form-control rounded" (change)="clockingResult(x.key).remarks = $event.target.value" [value]="clockingResult(x.key).remarks || ''" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="!isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                    <li *ngIf="isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

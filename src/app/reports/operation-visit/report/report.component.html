@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">
+                        <img src="assets/img/ic_note_text.png">
+                        Operation Visit
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Conducted By</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.conductedBy)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Visit Date</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control rounded" (change)="updateDate($event.target.value)" [value]="clientDate(report.visitDate)" [readonly]="!isEdit">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="time" class="form-control rounded" (change)="updateTime($event.target.value)" [value]="clientTime(report.visitDate)" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Images</label>
+                        <div class="col-sm-7">
+                            <img *ngFor="let x of report.images" class="well" [src]="imageFor(x.id)" alt="x.id" (click)="parseImage(x.id)">
+                            <label *ngIf="!report.images.length" class="control-label">N/A</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Security Officers</label>
+                        <div class="col-sm-7">
+                            <input *ngFor="let x of report.securityOfficers" type="text" class="form-control rounded" [value]="userName(x)" [readonly]="true">
+                            <label *ngIf="!report.securityOfficers.length" class="control-label">N/A</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Points</label>
+                        <div class="col-sm-7 no-padding">
+                            <div *ngFor="let x of report.officerRatings.data; index as i">
+                                <label class="col-sm-9">{{x.criteria}}</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control rounded" [(ngModel)]="report.officerRatings.data[i].point" [readonly]="!isEdit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Duties</label>
+                        <div class="col-sm-7 no-padding">
+                            <div *ngFor="let x of report.officerDuties.data; index as i">
+                                <label class="col-sm-10">{{x.criteria}}</label>
+                                <div class="col-sm-2">
+                                    <div class="ckbox ckbox-theme text-right">
+                                        <input [id]="['ckbox-' + i]" type="checkbox" [(ngModel)]="report.officerDuties.data[i].response" [disabled]="!isEdit">
+                                        <label [for]="['ckbox-' + i]"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Overall Performance</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [(ngModel)]="report.overallPerformance" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Feedback from Site Officer</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control rounded" [(ngModel)]="report.feedbackFromSiteOfficer" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Comments and Recommendations</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control rounded" [(ngModel)]="report.commentsRecommendations" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Client Name</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [(ngModel)]="report.clientName" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Client Designation</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [(ngModel)]="report.clientDesignation" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="!isApprove && !isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                    <li *ngIf="!isApprove && isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                    <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

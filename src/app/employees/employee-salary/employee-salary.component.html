@@ -1,0 +1,6 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <app-salary-header (selectUser)="changeUser($event)"></app-salary-header>
+        <router-outlet (activate)="componentAdded($event)" (deactivate)="componentRemoved($event)" name="salary"></router-outlet>
+    </div>
+</section>

@@ -1,0 +1,501 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Site</label>
+                        <div class="col-sm-7">
+                            <select class="form-control rounded" (change)="selectSite($event.target.value)">
+                                <option value="" disabled>Please Select</option>
+                                <option *ngFor="let x of sites" [value]="x._id">{{x.siteName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!!selectedSite" id="accordion-group" class="panel-group rounded shadow">
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#site-details">
+                                    Site Details
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="site-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div [class]="['form-group' + (siteNameError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Site Name <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedSite.siteName" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="siteNameError" class="text-right"><code>{{siteNameError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Address</label>
+                                        <div class="col-sm-7">
+                                            <textarea [(ngModel)]="selectedSite.address" class="form-control rounded" [readonly]="!isEdit"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Job Scopes</label>
+                                        <div class="col-sm-7">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Scope</th>
+                                                        <th style="width: 20%"><button type="button" (click)="[selectedSite.jobScope.push('')]" class="btn btn-primary" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of selectedSite.jobScope; index as i">
+                                                        <td><input type="text" (change)="[selectedSite.jobScope[i] = $event.target.value]" [value]="x" class="form-control rounded" [readonly]="!isEdit"></td>
+                                                        <td><button type="button" (click)="[selectedSite.jobScope.splice(i, 1)]" class="btn btn-danger" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Job Scope Document</label>
+                                        <div [hidden]="isEdit" class="col-sm-7">
+                                            <button *ngIf="selectedSite.jobScopeDocId" type="button" (click)="downloadDoc()" class="btn btn-primary">Download</button>
+                                            <label *ngIf="!selectedSite.jobScopeDocId" class="control-label text-left">N/A</label>
+                                        </div>
+                                        <div [hidden]="!isEdit" class="col-sm-7">
+                                            <input type="file" (change)="[this.scopeDoc = $event.target.files[0]]" class="form-control rounded">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Shift Details</label>
+                                        <div class="col-sm-7">
+                                            <div class="row">
+                                                <label class="col-xs-2 control-label text-left">Start: </label>
+                                                <div class="col-xs-4">
+                                                    <select class="form-control rounded" (change)="selectedSite.shiftDetails[0].start = selectedSite.shiftDetails[1].end = $event.target.value" [disabled]="!isEdit">
+                                                        <option *ngFor="let x of shiftAMOptions" [value]="x" [selected]="selectedSite.shiftDetails[0].start === x">{{x}}</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-xs-2 control-label text-left">End:</label>
+                                                <div class="col-xs-4">
+                                                    <select class="form-control rounded" (change)="selectedSite.shiftDetails[0].end = selectedSite.shiftDetails[1].start = $event.target.value" [disabled]="!isEdit">
+                                                        <option *ngFor="let x of shiftPMOptions" [value]="x" [selected]="selectedSite.shiftDetails[0].end === x">{{x}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <label class="col-xs-2 control-label text-left">Start: </label>
+                                                <div class="col-xs-4">
+                                                    <select class="form-control rounded" (change)="selectedSite.shiftDetails[1].start = $event.target.value" [disabled]="!isEdit">
+                                                        <option *ngFor="let x of shiftPMOptions" [value]="x" [selected]="selectedSite.shiftDetails[1].start === x">{{x}}</option>
+                                                    </select>
+                                                </div>
+                                                <label class="col-xs-2 control-label text-left">End:</label>
+                                                <div class="col-xs-4">
+                                                    <select class="form-control rounded" (change)="selectedSite.shiftDetails[1].end = $event.target.value" [disabled]="!isEdit">
+                                                        <option *ngFor="let x of shiftAMOptions" [value]="x" [selected]="selectedSite.shiftDetails[1].end === x">{{x}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#clocking-details">
+                                    Clocking Details
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="clocking-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/No</th>
+                                                        <th>Plan Time</th>
+                                                        <th style="width: 10%"><button type="button" (click)="[this.addPlanTime()]" class="btn btn-primary" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of selectedSite.clockingDetails.planTime; index as i">
+                                                        <td class="control-label text-left">{{i + 1}}</td>
+                                                        <td>
+                                                            <div [class]="['form-group no-padding' + (planTimeErrors[i] ? ' has-error' : '')]">
+                                                                <label class="col-sm-2 control-label text-left">From:</label>
+                                                                <div class="col-sm-4">
+                                                                    <select (change)="[x.from = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                                        <option value="" disabled>hh:mm</option>
+                                                                        <option *ngFor="let y of planOptions" [value]="y" [selected]="x.from === y">{{y}}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <label class="col-sm-2 control-label text-left">To:</label>
+                                                                <div class="col-sm-4">
+                                                                    <select (change)="[x.to = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                                        <option value="" disabled>hh:mm</option>
+                                                                        <option *ngFor="let y of planOptions" [value]="y" [selected]="x.to === y">{{y}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="planTimeErrors[i]" class="text-right"><code>{{planTimeErrors[i]}}</code></div>
+                                                        </td>
+                                                        <td><button type="button" (click)="[this.removePlanTime(i)]" class="btn btn-danger" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#equipment-details">
+                                    Equipment Details
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="equipment-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/No</th>
+                                                        <th>Equipment Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>Status</th>
+                                                        <th>Remark</th>
+                                                        <th style="width: 10%"><button type="button" (click)="[selectedSite.equipmentDetails.push(equipmentDetail())]" class="btn btn-primary" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of selectedSite.equipmentDetails; index as i">
+                                                        <td>{{i + 1}}</td>
+                                                        <td><input class="form-control rounded" [(ngModel)]="selectedSite.equipmentDetails[i].name" type="text" [readonly]="!isEdit"></td>
+                                                        <td style="width: 10%;">
+                                                            <input class="form-control rounded" [(ngModel)]="selectedSite.equipmentDetails[i].quantity" type="number" [readonly]="!isEdit">
+                                                        </td>
+                                                        <td>
+                                                            <select (change)="[x.status = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                                <option *ngFor="let y of statusOptions" [value]="y" [selected]="y === x.status">{{y}}</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><textarea [(ngModel)]="x.remark" class="form-control rounded" [readonly]="!isEdit"></textarea></td>
+                                                        <td><button type="button" (click)="[selectedSite.equipmentDetails.splice(i, 1)]" class="btn btn-danger" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#stationary-details">
+                                    Stationary Details
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="stationary-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/No</th>
+                                                        <th>Stationary Name</th>
+                                                        <th>Quantity</th>
+                                                        <th style="width: 10%"><button type="button" (click)="[selectedSite.stationaryDetails.push(stationaryDetail())]" class="btn btn-primary" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of selectedSite.stationaryDetails; index as i">
+                                                        <td>{{i + 1}}</td>
+                                                        <td><input class="form-control rounded" [(ngModel)]="selectedSite.stationaryDetails[i].name" type="text" [readonly]="!isEdit"></td>
+                                                        <td style="width: 10%;">
+                                                            <input class="form-control rounded" [(ngModel)]="selectedSite.stationaryDetails[i].quantity" type="number" [readonly]="!isEdit">
+                                                        </td>
+                                                        <td><button type="button" (click)="[selectedSite.stationaryDetails.splice(i, 1)]" class="btn btn-danger" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#contract-details">
+                                    Contact
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="contract-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Site Notification date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" (change)="[updateNotificationDate($event.target.value)]" [value]="[notificationDate()]" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Management Contact</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedSite.contract.managementContact" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">FCC Contacts</label>
+                                        <div class="col-sm-7">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Contact</th>
+                                                        <th style="width: 20%"><button type="button" (click)="[selectedSite.contract.fccContact.push('')]" class="btn btn-primary" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of selectedSite.contract.fccContact; index as i">
+                                                        <td><input class="form-control rounded" [(ngModel)]="selectedSite.contract.fccContact[i]" type="text" [readonly]="!isEdit"></td>
+                                                        <td><button type="button" (click)="[selectedSite.contract.fccContact.splice(i, 1)]" class="btn btn-danger" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#oevisits-details">
+                                    OE Visit
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="oevisits-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Date</label>
+                                        <div class="col-sm-7">
+                                            <input class="form-control rounded" [value]="today" type="date" (change)="fetchOEVisits($event.target.value)">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="oeVisits.length" class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/No</th>
+                                                        <th>Employee</th>
+                                                        <th>Feedback</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of oeVisits; index as i">
+                                                        <td>{{i + 1}}</td>
+                                                        <td>{{userName(x.userId)}}</td>
+                                                        <td>{{x.feedbackFromSiteOfficer}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!oeVisits.length" class="form-group">
+                                        <label class="col-sm-12 text-center">Nothing to display</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#drills-details">
+                                    Drills
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="drills-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Date</label>
+                                        <div class="col-sm-7">
+                                            <input class="form-control rounded" [value]="today" type="date" (change)="fetchDrills($event.target.value)">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="drills.length" class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/No</th>
+                                                        <th>Time</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of drills; index as i">
+                                                        <td>{{i + 1}}</td>
+                                                        <td>{{ x.incidentDateTime | date : 'HH:mm' }}</td>
+                                                        <td>{{x.fullDescription}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!drills.length" class="form-group">
+                                        <label class="col-sm-12 text-center">Nothing to display</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#occurrences-details">
+                                    Occurrences
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="occurrences-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Date</label>
+                                        <div class="col-sm-7">
+                                            <input class="form-control rounded" [value]="today" type="date" (change)="fetchOccurrences($event.target.value)">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="occurrences.length" class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/No</th>
+                                                        <th>Time</th>
+                                                        <th>Subject</th>
+                                                        <th>Occurrence</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of occurrences; index as i">
+                                                        <td>{{i + 1}}</td>
+                                                        <td>{{ x.dateTime | date : 'HH:mm' }}</td>
+                                                        <td>{{x.subject}}</td>
+                                                        <td>{{x.occurrence}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!occurrences.length" class="form-group">
+                                        <label class="col-sm-12 text-center">Nothing to display</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#aar-details">
+                                    AAR
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="aar-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Date</label>
+                                        <div class="col-sm-7">
+                                            <input class="form-control rounded" [value]="today" type="date" (change)="fetchAARs($event.target.value)">
+                                        </div>
+                                    </div>
+                                    <div *ngIf="aars.length" class="form-group">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/No</th>
+                                                        <th>Time</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of aars; index as i">
+                                                        <td>{{i + 1}}</td>
+                                                        <td>{{ x.dateTime | date : 'HH:mm' }}</td>
+                                                        <td>{{x.incidentDescription}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!aars.length" class="form-group">
+                                        <label class="col-sm-12 text-center">Nothing to display</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!isSO" [class]="['panel panel-footer' + (deleteConfirm ? ' bg-danger' : '')]">
+                        <ul *ngIf="!deleteConfirm" class="pager wizard no-margin">
+                            <li class="previous"><a (click)="deleteConfirm = true">Delete</a></li>
+                            <li *ngIf="!isEdit" class="next"><a (click)="isEdit = true">Edit</a></li>
+                            <li *ngIf="isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                        </ul>
+                        <ul *ngIf="deleteConfirm" class="pager wizard no-margin">
+                            <li><h4><strong>Are you sure you want to delete this site?</strong></h4></li>
+                            <li class="previous"><a (click)="deleteConfirm = false">Deny</a></li>
+                            <li class="next"><a (click)="delete()">Confirm</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</section>

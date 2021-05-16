@@ -1,0 +1,18 @@
+.form-group {
+    position: relative;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.form-group.form-group-divider {
+    background-color: #eeeeee;
+    padding: 0px;
+    margin-bottom: 0px;
+}
+
+.form-group.form-group-divider .form-inner {
+    border-left: 5px solid #71a117;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}

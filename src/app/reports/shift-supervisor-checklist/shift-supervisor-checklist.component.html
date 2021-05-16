@@ -1,0 +1,7 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <app-ssc-search #reportSearch [hidden]="!isSearch" [url]="url" (reportSelect)="viewReport($event)"></app-ssc-search>
+        <app-ssc-report [hidden]="isSearch" [url]="url" [isEdit]="isEdit" [isApprove]="isApprove" [report]="report"
+            (approveReport)="approveReport()" (editReport)="editReport()" (openSearch)="viewSearch()" (triggerRefresh)="triggerFetch()"></app-ssc-report>
+    </div>
+</section>

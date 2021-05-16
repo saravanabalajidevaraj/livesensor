@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+.export-buttons {
+    padding-top: 5px;
+}
+
+.export-buttons button {
+    margin-left: 5px;
+}
+
+.report-title {
+    height: 30px;
+    font-size: 24px;
+}
+
+.report-title > img {
+    height: 30px;
+}

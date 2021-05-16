@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-12 text-center report-title">Vacation</div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Employee</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.employeeId)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Reviewed By</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.approverId)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Status</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="report.status || 'PENDING'" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Application Date</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control rounded" [value]="report.dateCreated.slice(0, 10)" [readonly]="true">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="time" class="form-control rounded" [value]="report.dateCreated.slice(11, 16)" [readonly]="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Vacation Type</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="vacationType()" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">From</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control rounded" [value]="fromDate()" (change)="updateFrom($event.target.value)" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">To</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control rounded" [value]="toDate()" (change)="updateTo($event.target.value)" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Duration</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control rounded" (change)="updateDuration($event.target.value)" [value]="getDuration()" [readonly]="!isEdit">
+                            </div>
+                            <label class="col-sm-2 control-label"> Day(s)</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Comments</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control rounded" [value]="report.comments" (change)="updateComments($event.target.value)" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                    <div [hidden]="!report.fileId || isEdit" class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">File</label>
+                        <div class="col-sm-7">
+                            <button type="button" class="btn btn-primary" (click)="downloadDoc()">Download</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!isEdit" class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Document</label>
+                        <div class="col-sm-7">
+                            <input type="file" class="form-control rounded" (change)="updateDocument($event.target.value)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="!isApprove && !isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                    <li *ngIf="!isApprove && isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                    <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

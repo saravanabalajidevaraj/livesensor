@@ -1,0 +1,283 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel-body no-padding">
+                		<div class="form-horizontal form-bordered">
+                            <div class="form-group form-group-divider">
+                                <div class="form-inner">
+                                    <h3 class="no-margin">Personal</h3>
+                                </div>
+                            </div>
+                			<div class="form-body">
+                                <div [class]="['form-group' + (firstNameError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">First Name <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="firstName" class="form-control rounded">
+                                        <div *ngIf="firstNameError" class="text-right"><code>{{firstNameError}}</code></div>
+                                    </div>
+                                </div>
+                                <div [class]="['form-group' + (lastNameError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Last Name <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="lastName" class="form-control rounded">
+                                        <div *ngIf="lastNameError" class="text-right"><code>{{lastNameError}}</code></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Gender</label>
+                                    <div class="col-sm-7">
+                                        <select (change)="[this.gender = $event.target.value]" class="form-control rounded">
+                                            <option value="" disabled>Choose Gender</option>
+                                            <option *ngFor="let x of genders" [value]="x">{{x}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div [class]="['form-group' + (lastNameError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Date Of Birth <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="dob" class="form-control rounded">
+                                        <div *ngIf="dobError" class="text-right"><code>{{dobError}}</code></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Mobile Number</label>
+                                    <div class="col-sm-7">
+                                        <input type="tel" [(ngModel)]="phone" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Address</label>
+                                    <div class="col-sm-7">
+                                        <textarea [(ngModel)]="address" class="form-control rounded"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Marital Status</label>
+                                    <div class="col-sm-7">
+                                        <select (change)="[this.maritalStatus = $event.target.value]" class="form-control rounded">
+                                            <option value="" disabled>Select Status</option>
+                                            <option *ngFor="let x of maritalStatuses" [value]="x">{{x}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Nationality</label>
+                                    <div class="col-sm-7">
+                                        <select (change)="[this.nationality = $event.target.value]" class="form-control rounded">
+                                            <option value="" disabled>Select Nationality</option>
+                                            <option *ngFor="let x of nations" [value]="x">{{x}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                				<div class="form-group form-group-divider">
+                					<div class="form-inner">
+                						<h3 class="no-margin">Professional</h3>
+                					</div>
+                				</div>
+                                <div [class]="['form-group' + (staffError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Staff Id <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="staffId" class="form-control rounded">
+                                        <div *ngIf="staffError" class="text-right"><code>{{staffError}}</code></div>
+                                    </div>
+                                </div>
+                                <div [class]="['form-group' + (designationError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Designation <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <select (change)="[this.designation = $event.target.value]" class="form-control rounded">
+                                            <option value="" disabled>Select Designation</option>
+                                            <option *ngFor="let x of designations" [value]="x._id">{{x.description}}</option>
+                                        </select>
+                                        <div *ngIf="designationError" class="text-right"><code>{{designationError}}</code></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">PWM Grade</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="pwmGrade" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div [class]="['form-group' + (deploymentGradeError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Deployment Grade <span *ngIf="role === 'SO'" class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="deploymentGrade" class="form-control rounded">
+                                        <div *ngIf="deploymentGradeError" class="text-right"><code>{{deploymentGradeError}}</code></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Joining Date</label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="joinDate" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div [class]="['form-group' + (confirmError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Confirmation Date <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="confirmDate" class="form-control rounded">
+                                        <div *ngIf="confirmError" class="text-right"><code>{{confirmError}}</code></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">WP Issue Date</label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="wpIssuedDate" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">WP Expiry Date</label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="wpExpiryDate" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Bank Account</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="account" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Courses Done</label>
+                                    <div class="col-sm-7">
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Course</th>
+                                                    <th><button type="button" (click)="this.courses.push('')" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let x of courses; index as i">
+                                                    <td><input type="text" (change)="this.courses[i] = $event.target.value" [value]="x" class="form-control rounded"></td>
+                                                    <td><button type="button" (click)="this.courses.splice(i, 1)" class="btn btn-danger"><i class="fa fa-times-circle"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                				<div class="form-group form-group-divider">
+                					<div class="form-inner">
+                						<h3 class="no-margin">Official</h3>
+                					</div>
+                				</div>
+                                <div [class]="['form-group' + (userNameError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">User Name <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="userName" class="form-control rounded">
+                                        <div *ngIf="userNameError" class="text-right"><code>{{userNameError}}</code></div>
+                                    </div>
+                                </div>
+                                <div [class]="['form-group' + (passwordError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Password <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="password" class="form-control rounded">
+                                        <div *ngIf="lastNameError" class="text-right"><code>{{passwordError}}</code></div>
+                                    </div>
+                                </div>
+                                <div [class]="['form-group' + (roleError ? ' has-error' : '')]">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">App Role <span class="asterisk">*</span></label>
+                                    <div class="col-sm-7">
+                                        <select (change)="[this.role = $event.target.value]" class="form-control rounded">
+                                            <option value="" disabled>Choose Role</option>
+                                            <option *ngFor="let x of roles" [value]="x">{{x}}</option>
+                                        </select>
+                                        <div *ngIf="roleError" class="text-right"><code>{{roleError}}</code></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Profile Picture</label>
+                                    <div class="col-sm-7">
+                                        <input type="file" (change)="[this.profileImage = $event.target.files[0]]" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Employment Contract</label>
+                                    <div class="col-sm-7">
+                                        <input type="file" (change)="[this.empContract = $event.target.files[0]]" class="form-control rounded" accept=".pdf,.doc,.docx">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Uniform Issue Status</label>
+                                    <div class="col-sm-7">
+                                        <select (change)="[this.uniformIssueStatus = $event.target.value]" class="form-control rounded">
+                                            <option value="" disabled>Choose Issue Status</option>
+                                            <option value="issued">Issued</option>
+                                            <option value="returned">Returned</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">NOK</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" [(ngModel)]="nok" class="form-control rounded" >
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Notification Add Date</label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="notificationAddDate" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Notification Cancel Date</label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="notificationCancelDate" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Resignation Date</label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="resignationDate" class="form-control rounded">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Termination Date</label>
+                                    <div class="col-sm-7">
+                                        <input type="date" [(ngModel)]="terminationDate" class="form-control rounded">
+                                    </div>
+                                </div>
+                			</div>
+                		</div>
+                	</div>
+                    <div class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li class="next"><a (click)="submit()">Add Employee</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</section>

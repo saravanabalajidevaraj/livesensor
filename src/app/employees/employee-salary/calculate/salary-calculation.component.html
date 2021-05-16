@@ -1,0 +1,162 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Salary Calculation</h3>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">Employee</label>
+                        <div class="col-sm-7">{{userName(user)}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Basic</label>
+                        <div class="col-sm-7">
+                            <div class="input-group rounded">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" (input)="updateBasic($event.target.value)" [value]="salary.basicSalary" min="0" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">OT per Hour</label>
+                        <div class="col-sm-7">
+                            <div class="input-group rounded">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" [(ngModel)]="salary.overTime" min="0" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="allowances" class="panel-group rounded shadow">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#allowances" href="#types">Allowances</a>
+                            </h4>
+                        </div>
+                        <div id="types" class="panel-collapse collapse show">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Grooming</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group rounded">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="number" [(ngModel)]="salary.grooming" min="0" class="form-control" step="0.01">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Performance</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group rounded">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="number" [(ngModel)]="salary.attendance" min="0" class="form-control" step="0.01">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-1"></div>
+                                    <label class="col-sm-3 control-label text-left">Others</label>
+                                    <div class="col-sm-7">
+                                        <div class="input-group rounded">
+                                            <span class="input-group-addon">$</span>
+                                            <input type="number" [(ngModel)]="salary.others" min="0" class="form-control" step="0.01">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Medical Reimbursement</label>
+                        <div class="col-sm-7">
+                            <div class="input-group rounded">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" [(ngModel)]="salary.medicalReimbursement" min="0" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Advance</label>
+                        <div class="col-sm-7">
+                            <div class="input-group rounded">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" [(ngModel)]="salary.advance" min="0" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Loan</label>
+                        <div class="col-sm-7">
+                            <div class="input-group rounded">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" [(ngModel)]="salary.loan" min="0" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Salary per PH</label>
+                        <div class="col-sm-7">
+                            <div class="input-group rounded">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" [(ngModel)]="salary.ph" min="0" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">PH worked</label>
+                        <div class="col-sm-7">
+                            <input type="number" [(ngModel)]="salary.phDays" min="0" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Salary per Rest Day</label>
+                        <div class="col-sm-7">
+                            <div class="input-group rounded">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" [(ngModel)]="salary.restDaySalary" min="0" class="form-control" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Rest Days worked</label>
+                        <div class="col-sm-7">
+                            <input type="number" [(ngModel)]="salary.restDaysWorked" min="0" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Note</label>
+                        <div class="col-sm-7">
+                            <textarea [(ngModel)]="salary.note" class="form-control rounded"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Employee Attendance</label>
+                        <label class="col-sm-7 control-label text-left">{{salary.daysWorked}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li class="next"><a (click)="submit()">Submit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>

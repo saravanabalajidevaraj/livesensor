@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">
+                        <img src="assets/img/ic_message_alert.png">
+                        Officer Feedback
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Site</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="siteName(report.siteId)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Officer</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.userId)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Date Time</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control rounded" [value]="this.clientDate(report.dateCreated)" [readonly]="true">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="time" class="form-control rounded" [value]="this.clientTime(report.dateCreated)" [readonly]="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Contact No</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control rounded" [(ngModel)]="report.contactNo" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Comments</label>
+                        <div class="col-sm-7">
+                            <textarea type="text" class="form-control rounded" [(ngModel)]="report.comments" [readonly]="true"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

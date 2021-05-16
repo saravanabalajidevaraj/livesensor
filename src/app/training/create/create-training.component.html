@@ -1,0 +1,98 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel-heading no-padding">
+                        <div class="panel-title row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 text-center report-title">Create Training</div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content form-horizontal">
+                            <div [class]="['form-group' + (titleError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 control-label text-left">Title <span class="asterisk">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control rounded" [(ngModel)]="title">
+                                        <div *ngIf="titleError" class="text-right"><code>{{titleError}}</code></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 control-label text-left">Details</label>
+                                    <div class="col-sm-10">
+                                        <textarea type="text" class="form-control rounded" [(ngModel)]="details"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (locationError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 control-label text-left">Location <span class="asterisk">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control rounded" [(ngModel)]="location">
+                                        <div *ngIf="locationError" class="text-right"><code>{{locationError}}</code></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (dateError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 control-label text-left">Date <span class="asterisk">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="date" [(ngModel)]="date" class="form-control rounded">
+                                        <div *ngIf="dateError" class="text-right"><code>{{dateError}}</code></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (timeError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 control-label text-left">Time <span class="asterisk">*</span></label>
+                                    <div class="col-sm-10 no-padding">
+                                        <label class="col-sm-2 control-label text-left">From:</label>
+                                        <div class="col-sm-4">
+                                            <input type="time" [(ngModel)]="from" class="form-control rounded">
+                                        </div>
+                                        <label class="col-sm-2 control-label text-left">To:</label>
+                                        <div class="col-sm-4">
+                                            <input type="time" [(ngModel)]="to" class="form-control rounded">
+                                        </div>
+                                        <div *ngIf="timeError" class="col-sm-12 text-right"><code>{{timeError}}</code></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (empError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10">
+                                    <label class="col-sm-2 control-label text-left">Employees <span class="asterisk">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control rounded" (change)="updateUserChoice($event.target.value)">
+                                            <option value="all" selected>Post To All</option>
+                                            <option value="selected">Post To Selected Candidates</option>
+                                        </select>
+                                        <ejs-treeview #userTree class="well" [hidden]="userChoice === 'all'"
+                                            [showCheckBox]='true' [sortOrder]='"Ascending"' [fields]="usersAsTree"></ejs-treeview>
+                                        <div *ngIf="empError" class="text-right"><code>{{empError}}</code></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li class="next"><a (click)="submit()">Submit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</section>

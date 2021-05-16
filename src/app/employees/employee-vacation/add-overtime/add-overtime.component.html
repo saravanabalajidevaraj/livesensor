@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">Add Overtime</div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">Employee</label>
+                        <div class="col-sm-7">{{userName(user)}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">Approver</label>
+                        <div class="col-sm-7">{{userName(loggedInUser())}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">HR</label>
+                        <div class="col-sm-7">{{userName(hr)}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">Duration</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-12 no-padding">
+                                <div class="col-sm-10">
+                                    <input type="number" min="0" class="form-control rounded" [(ngModel)]="duration">
+                                </div>
+                                <label class="col-sm-2 control-label"> Hr(s)</label>
+                            </div>
+                            <div *ngIf="durationError" class="text-right"><code>{{durationError}}</code></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3">Comments</label>
+                        <div class="col-sm-7">
+                            <textarea class="form-control rounded" [(ngModel)]="comments"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li class="next"><a (click)="submit()">Submit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>

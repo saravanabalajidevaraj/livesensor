@@ -1,0 +1,7 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <app-cl-search #reportSearch [hidden]="!isSearch" [url]="url" (reportSelect)="viewReport($event)" (sitePoints)="updatePoints($event)"></app-cl-search>
+        <app-cl-report [hidden]="isSearch" [url]="url" [isEdit]="isEdit" [isApprove]="false" [report]="report" [clockingData]="parseReport()" [points]="points"
+            (editReport)="editReport()" (openSearch)="viewSearch()" (triggerRefresh)="triggerFetch()"></app-cl-report>
+    </div>
+</section>

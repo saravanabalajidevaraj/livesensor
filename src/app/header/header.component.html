@@ -1,0 +1,123 @@
+<!-- START @HEADER -->
+<header id="header">
+
+    <!-- Start header left -->
+    <div class="header-left">
+        <!-- Start offcanvas left: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+        <div class="navbar-minimize-mobile left">
+            <i class="fa fa-bars"></i>
+        </div>
+        <!--/ End offcanvas left -->
+
+        <!-- Start navbar header -->
+        <div class="navbar-header">
+
+             <!-- Start brand -->
+             <a class="navbar-brand" href="dashboard.html" style="margin:4px auto">
+                    <img class="logo" src="assets/img/lss.png" alt="Brand Logo">
+            </a><!-- /.navbar-brand -->
+            <!--/ End brand -->
+
+        </div><!-- /.navbar-header -->
+        <!--/ End navbar header -->
+
+        <!-- Start offcanvas right: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+        <div class="navbar-minimize-mobile right">
+            <i class="fa fa-cog"></i>
+        </div>
+        <!--/ End offcanvas right -->
+
+        <div class="clearfix"></div>
+    </div><!-- /.header-left -->
+    <!--/ End header left -->
+
+    <!-- Start header right -->
+    <div class="header-right">
+        <!-- Start navbar toolbar -->
+        <div class="navbar navbar-toolbar">
+
+            <!-- Start left navigation -->
+            <ul class="nav navbar-nav navbar-left">
+
+                <!-- Start sidebar shrink -->
+                <li class="navbar-minimize">
+                    <a href="javascript:void(0);" title="Minimize sidebar">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </li>
+                <!--/ End sidebar shrink -->
+
+
+            </ul><!-- /.navbar-left -->
+            <!--/ End left navigation -->
+
+            <!-- Start right navigation -->
+            <ul class="nav navbar-nav navbar-right">
+
+                <!-- Start notifications -->
+                <li class="dropdown navbar-notification">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-bell-o"></i>
+                        <span *ngIf="list.length > 0"class="rounded count label label-danger">{{list.length}}</span>
+                    </a>
+
+                    <!-- Start dropdown menu -->
+                    <div class="dropdown-menu animated flipInX">
+                        <div class="dropdown-header">
+                            <span class="title">Notifications <strong>({{list.length}})</strong></span>
+                        </div>
+                        <div class="dropdown-body niceScroll">
+                            <div class="media-list small">
+                                <a *ngFor="let x of list; index as i" (click)="notificiationSelect(x)" class="media">
+                                    <div *ngIf="i < 6" class="media-object pull-left">
+                                        <img [src]="image(x.notificationType)" alt=""/>
+                                    </div>
+                                    <div *ngIf="i < 6" class="media-body">
+                                        <span class="media-text">{{x.description}}. Please Check.</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <!--/ End notification list -->
+                        </div>
+                        <div class="dropdown-footer">
+                            <a [routerLink]="['/notifications']">See All</a>
+                        </div>
+                    </div>
+                    <!--/ End dropdown menu -->
+
+                </li><!-- /.navbar-notification -->
+                <!--/ End notifications -->
+
+                <!-- Start profile -->
+                <li class="dropdown navbar-profile">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="meta">
+                            <span class="avatar"><img [src]="userImage" class="img-circle" alt="admin"></span>
+                            <span class="text hidden-xs hidden-sm text-muted">{{user.firstName}} {{user.lastName}}</span>
+                            <span class="caret"></span>
+                        </span>
+                    </a>
+                    <!-- Start dropdown menu -->
+                    <ul class="dropdown-menu animated flipInX">
+                        <li class="dropdown-header">Account</li>
+                        <li><a [routerLink]="['/dashboard-employee']"><i class="fa fa-user"></i>View profile</a></li>
+                        <li><a (click)="triggerImageSelect()"><i class="fa fa-upload"></i>Upload Photo</a></li>
+                        <li class="divider"></li>
+                        <li><a [routerLink]="['/login']"><i class="fa fa-sign-out"></i>Logout</a></li>
+                    </ul>
+                    <input #imageSelect (change)="uploadImage($event.target.files[0])" accept=".jpeg,.jpg,.png" type="file" style="display:none">
+                    <!--/ End dropdown menu -->
+                </li><!-- /.navbar-profile -->
+                <!--/ End profile -->
+
+            </ul><!-- /.navbar-right -->
+            <!--/ End right navigation -->
+
+        </div><!-- /.navbar-toolbar -->
+        <!--/ End navbar toolbar -->
+    </div><!-- /.header-right -->
+    <!--/ End header left -->
+
+</header> <!-- /#header -->
+<!--/ END HEADER -->

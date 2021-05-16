@@ -1,0 +1,111 @@
+<section>
+    <div class="row body-content animated fadeIn">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="panel rounded shadow no-overflow">
+                <div class="panel-heading no-padding">
+                    <div class="panel-title row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 text-center report-title">Client Satisfaction</div>
+                    </div>
+                </div>
+                <div *ngIf="!loading" class="panel-body">
+                    <div *ngIf="!submitted && isValid" class="panel-body no-padding">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6 card">
+                                <div class="card-body">
+                                    <h3 class="text-center">Dear Valued Client</h3>
+                                    <p class="lead text-center">
+                                        We will greatly appreciate it if you would kindly take a few minutes of your time to complete this survey form to help us improve our services.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <br>
+                        <div *ngIf="!!metadata" class="row form-group">
+                            <label class="col-sm-2 text-right"><strong>Creator</strong></label>
+                            <label class="col-sm-4 text-left">{{metadata.userCreated}}</label>
+                            <label class="col-sm-2 text-right"><strong>Site</strong></label>
+                            <label class="col-sm-4 text-left">{{metadata.siteName}}</label>
+                        </div>
+                        <br>
+                        <div class="form-group table-responsive">
+                            <table class="table table-bordered table-middle table-lilac">
+                                <thead>
+                                    <tr>
+                                        <th>S/No</th>
+                                        <th>Item</th>
+                                        <th style="width: 20%;">Selection</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let x of items; index as i" class="border-warning">
+                                        <td>{{i + 1}}</td>
+                                        <td>{{x.item}}</td>
+                                        <td>
+                                            <select (change)="items[i].selection = $event.target.value" class="form-control rounded">
+                                                <option *ngFor="let y of choices" [value]="y">{{y}}</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="text" class="form-control rounded" [(ngModel)]="items[i].note"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-middle">
+                                <thead>
+                                    <tr>
+                                        <th>Comments</th>
+                                        <th style="width: 11%;">
+                                            <button class="btn btn-primary" type="button" (click)="comments.push('')"><i class="fa fa-plus-circle"></i></button>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let x of comments; index as i">
+                                        <td><input type="text" class="form-control rounded" (change)="comments[i] = $event.target.value" [value]="x"></td>
+                                        <td><button class="btn btn-danger" type="button" (click)="comments.splice(i, 1)"><i class="fa fa-times-circle"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                        </div>
+                    </div>
+                    <div *ngIf="!isValid" class="panel-body no-padding">
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6 card">
+                                <div class="card-body">
+                                    <p class="lead text-center">Invalid link. Please contact the Administrator.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </div>
+                    <div *ngIf="submitted && isValid" class="panel-body no-padding">
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6 card">
+                                <div class="card-body">
+                                    <p class="lead text-center">Your response has been submitted.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="isValid && !submitted" class="panel-footer">
+                    <ul class="pager wizard no-margin">
+                        <li class="next"><a (click)="submit()">Submit</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</section>

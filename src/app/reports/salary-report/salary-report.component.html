@@ -1,0 +1,48 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">Search Salary Slips</h3>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <select #month class="form-control rounded">
+                            <option value="" disabled>Please Select</option>
+                            <option *ngFor="let x of months; index as i" [value]="i + 1">{{x}}</option>
+                        </select>
+                        <div *ngIf="monthError" class="text-right"><code>{{monthError}}</code></div>
+                    </div>
+                    <div class="col-sm-4 no-padding">
+                        <select #year class="form-control rounded">
+                            <option value="" disabled>Please Select</option>
+                            <option *ngFor="let x of years; index as i" [value]="i + 1">{{x}}</option>
+                        </select>
+                        <div *ngIf="yearError" class="text-right"><code>{{yearError}}</code></div>
+                    </div>
+                    <div class="col-sm-4">
+                        <button #search type="button" class="btn btn-primary btn-block rounded" (click)="fetchReports(month.value, year.value)">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body no-padding">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-middle table-lilac">
+                        <thead>
+                            <tr>
+                                <th>S/No</th>
+                                <th>Employee</th>
+                                <th style="width: 11%;">Payslip</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let x of reports; index as i" class="border-warning">
+                                <td>{{i + 1}}</td>
+                                <td>{{userName(x.employeeId)}}</td>
+                                <td><button class="btn btn-primary" type="button" (click)="generate(x)">Download</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

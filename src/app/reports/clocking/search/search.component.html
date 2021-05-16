@@ -1,0 +1,67 @@
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title text-center">Search Clocking</h3>
+        <div class="row">
+            <div class="col-sm-3">
+                <select #site class="form-control rounded">
+                    <option value="" disabled>Please Select</option>
+                    <option *ngFor="let x of sites | keyvalue" [value]="x.key">{{x.value.siteName}}</option>
+                </select>
+                <div *ngIf="siteError" class="text-right"><code>{{siteError}}</code></div>
+            </div>
+            <div class="col-sm-6 no-padding">
+                <div class="col-sm-6">
+                    <input #from class="form-control rounded" type="date" [value]="today">
+                </div>
+                <div class="col-sm-6">
+                    <input #to class="form-control rounded" type="date" [value]="today">
+                </div>
+                <div *ngIf="timeError" class="col-sm-12 text-right"><code>{{timeError}}</code></div>
+            </div>
+            <div class="col-sm-3">
+                <button #search type="button" class="btn btn-primary btn-block rounded" (click)="fetchReports(from.value, to.value, {siteId: site.value})">Search</button>
+                <div *ngIf="rows.length" class="export-buttons text-right">
+                    <button type="button" class="btn btn-success btn-sm rounded" (click)="exportAsExcel()"><i class="fa fa-file-excel-o"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body no-padding">
+        <div class="table-responsive">
+            <table class="table table-bordered table-middle table-lilac">
+                <thead>
+                    <tr>
+                        <th class="no-padding" style="width: 0px;"></th>
+                        <th>S/No</th>
+                        <th>Points</th>
+                        <th>Plan Time</th>
+                        <th>Officer</th>
+                        <th>Checkpoint</th>
+                        <th>Clocking Time</th>
+                        <th>Reason</th>
+                        <th>Remarks</th>
+                        <th class="text-center" style="width: 11%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let x of rows" class="border-warning">
+                        <td class="no-padding" style="width: 0px;"></td>
+                        <td *ngIf="!x.j" [attr.rowspan]="points.size">{{x.i + 1}}</td>
+                        <td *ngIf="!x.j" [attr.rowspan]="points.size">{{points.size}}</td>
+                        <td *ngIf="!x.j" [attr.rowspan]="points.size">{{x.r.planTime}}</td>
+                        <td>{{user(x.r, x.p)}}</td>
+                        <td>{{pointName(x.p)}}</td>
+                        <td>{{issue(x.r, x.p) || clockingTime(x.r, x.p)}}</td>
+                        <td>{{reason(x.r, x.p)}}</td>
+                        <td>{{remarks(x.r, x.p)}}</td>
+                        <td *ngIf="!x.j" [attr.rowspan]="points.size" class="text-center">
+                            <a class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail" (click)="openReport(x.r, false)"><i class="fa fa-eye"></i></a>
+                            <a class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Edit" (click)="openReport(x.r, true)"><i class="fa fa-pencil"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

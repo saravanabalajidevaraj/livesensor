@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">
+                        <img src="assets/img/ic_alert.png">
+                        Fire Incident
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Incident Type</label>
+                        <div class="col-sm-7">
+                            <select class="form-control rounded" (change)="updateIncidentType($event.target.value)" [disabled]="!isEdit">
+                                <option *ngFor="let x of types" value="x" [selected]="x === report.incidentType">{{x}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Incident Time</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control rounded" (change)="updateDate($event.target.value)" [value]="clientDate(report.incidentDateTime)" [readonly]="!isEdit">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="time" class="form-control rounded" (change)="updateTime($event.target.value)" [value]="clientTime(report.incidentDateTime)" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Block/Floor/Zone</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control rounded" (input)="updateBlock($event.target.value)" [value]="block()" [readonly]="!isEdit">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control rounded" (input)="updateFloor($event.target.value)" [value]="floor()" [readonly]="!isEdit">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control rounded" (input)="updateZone($event.target.value)" [value]="zone()" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Location</label>
+                        <div class="col-sm-7">
+                            <textarea type="text" class="form-control rounded" [(ngModel)]="report.location" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Cause</label>
+                        <div class="col-sm-7">
+                            <textarea type="text" class="form-control rounded" [(ngModel)]="report.cause" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Images</label>
+                        <div class="col-sm-7">
+                            <img *ngFor="let x of report.images" class="well" [src]="imageFor(x.id)" alt="x.id" (click)="parseImage(x.id)">
+                            <label *ngIf="!report.images.length" class="control-label">N/A</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Security Officers Count</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control rounded" [(ngModel)]="report.involvedSOCount" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Accomplishment</label>
+                        <div class="col-sm-7">
+                            <div *ngFor="let x of report.response.data; index as i" class="row">
+                                <label class="col-md-11 form-control text-left">{{x.question}}</label>
+                                <div class="col-md-1">
+                                    <div class="ckbox ckbox-theme">
+                                        <input [id]="['ckbox-' + i]" type="checkbox" [(ngModel)]="report.response.data[i].response" [disabled]="!isEdit">
+                                        <label [for]="['ckbox-' + i]"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Remarks</label>
+                        <div class="col-sm-7">
+                            <textarea type="text" class="form-control rounded" [(ngModel)]="report.remarks" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Description</label>
+                        <div class="col-sm-7">
+                            <textarea type="text" class="form-control rounded" [(ngModel)]="report.fullDescription" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                    <div *ngIf="!!report.drillEndTime" class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">End Time</label>
+                        <div class="col-sm-7 no-padding">
+                            <div class="col-sm-6">
+                                <input type="date" class="form-control rounded" [value]="clientDate(report.incidentDateTime)" [readonly]="true">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="time" class="form-control rounded" (change)="updateEndTime($event.target.value)" [value]="clientTime(report.drillEndTime)" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Security Manager</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.securityStaff)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Estates / Manager</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.managementStaff)" [readonly]="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="!isApprove && !isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                    <li *ngIf="!isApprove && isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                    <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

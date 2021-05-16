@@ -1,0 +1,51 @@
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title text-center">Search Training</h3>
+        <div class="row">
+            <div class="col-sm-8 no-padding">
+                <div class="col-sm-6">
+                    <input #from class="form-control rounded" type="date" [value]="today">
+                </div>
+                <div class="col-sm-6">
+                    <input #to class="form-control rounded" type="date" [value]="today">
+                </div>
+                <div *ngIf="timeError" class="col-sm-12 text-right"><code>{{timeError}}</code></div>
+            </div>
+            <div class="col-sm-4">
+                <button #search type="button" class="btn btn-primary btn-block rounded" (click)="fetchReports(from.value, to.value)">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body no-padding">
+        <div class="table-responsive">
+            <table class="table table-bordered table-middle table-lilac">
+                <thead>
+                    <tr>
+                        <th>S/No</th>
+                        <th>Created By</th>
+                        <th>Title</th>
+                        <th>Details</th>
+                        <th>Date</th>
+                        <th class="text-center" style="width: 11%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-template ngFor let-x let-i="index" [ngForOf]="reports">
+                        <tr class="border-warning">
+                            <td>{{i + 1}}</td>
+                            <td>{{userName(x.userId)}}</td>
+                            <td>{{x.title}}</td>
+                            <td>{{x.details}}</td>
+                            <td>{{ x.fromDate | date : 'dd/MM/yyyy' }}</td>
+                            <td [hidden]="delete[i]" class="text-center">
+                                <a class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="View detail" (click)="openReport(x, false)"><i class="fa fa-eye"></i></a>
+                                <!--a class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Edit" (click)="openReport(x, true)"><i class="fa fa-pencil"></i></a-->
+                                <a class="btn btn-info btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Complete" [routerLink]="['/complete-training/' + x._id]"><i class="fa fa-users"></i></a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

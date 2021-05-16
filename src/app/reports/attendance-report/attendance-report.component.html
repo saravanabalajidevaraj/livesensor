@@ -1,0 +1,7 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <app-ar-search #reportSearch [hidden]="!isSearch" [url]="url" (reportSelect)="viewReport($event)" (holi)="updateHoliday($event)" (deps)="updateDeps($event)"></app-ar-search>
+        <app-ar-report [hidden]="isSearch" [url]="url" [isEdit]="isEdit" [isApprove]="isApprove" [report]="report" [holiday]="holiday" [deployments]="deployments"
+            (editReport)="editReport()" (openSearch)="viewSearch()" (triggerRefresh)="triggerFetch()"></app-ar-report>
+    </div>
+</section>

@@ -1,0 +1,531 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div *ngIf="isAdmin || isOE" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Employee</label>
+                        <div class="col-sm-7">
+                            <select class="form-control rounded" (change)="selectEmployee($event.target.value)">
+                                <option value="" disabled>Please Select</option>
+                                <option *ngFor="let x of userIds" [value]="x" [selected]="selectedId === x">{{userName(x)}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!!selectedEmployee" id="accordion-group" class="panel-group rounded shadow">
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#personal-details">
+                                    Personal
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="personal-details" [class]="['panel-collapse collapse' + (firstNameError||lastNameError||dobError ? ' show' : '')]">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div [class]="['form-group' + (firstNameError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">First Name <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.firstName" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="firstNameError" class="text-right"><code>{{firstNameError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div [class]="['form-group' + (lastNameError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Last Name <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.lastName" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="lastNameError" class="text-right"><code>{{lastNameError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Gender</label>
+                                        <div class="col-sm-7">
+                                            <select (change)="[selectedEmployee.gender = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                <option value="" disabled>Select Gender</option>
+                                                <option *ngFor="let x of genders" [value]="x" [selected]="x === selectedEmployee.gender">{{x}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div [class]="['form-group' + (lastNameError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Date Of Birth <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="date" [value]="selectedEmployee.dateOfBirth && selectedEmployee.dateOfBirth.slice(0, 10) || ''" (change)="selectedEmployee.dateOfBirth = $event.target.value" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="dobError" class="text-right"><code>{{dobError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Mobile Number</label>
+                                        <div class="col-sm-7">
+                                            <input type="tel" [(ngModel)]="selectedEmployee.phone" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Address</label>
+                                        <div class="col-sm-7">
+                                            <textarea [(ngModel)]="selectedEmployee.address" class="form-control rounded" [readonly]="!isEdit"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Marital Status</label>
+                                        <div class="col-sm-7">
+                                            <select (change)="[selectedEmployee.maritalStatus = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                <option value="" disabled>Select Status</option>
+                                                <option *ngFor="let x of maritalStatuses" [value]="x" [selected]="x === selectedEmployee.maritalStatus">{{x}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Nationality</label>
+                                        <div class="col-sm-7">
+                                            <select (change)="[selectedEmployee.nationality = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                <option value="" disabled>Select Nationality</option>
+                                                <option *ngFor="let x of nations" [value]="x" [selected]="x === selectedEmployee.nationality">{{x}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#professional-details">
+                                    Professional
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="professional-details" [class]="['panel-collapse collapse' + (staffError||deploymentGradeError||confirmError ? ' show' : '')]">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div [class]="['form-group' + (staffError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Staff Id <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.staffId" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="staffError" class="text-right"><code>{{staffError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Designation <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <select (change)="[selectedEmployee.designation = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                <option value="" disabled>Select Designation</option>
+                                                <option *ngFor="let x of designations" [value]="x._id" [selected]="x._id === selectedEmployee.designation">{{x.description}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">PWM Grade</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.pwmGrade" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div [class]="['form-group' + (deploymentGradeError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Deployment Grade <span *ngIf="selectedEmployee.role === 'SO'" class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.deploymentGrade" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="deploymentGradeError" class="text-right"><code>{{deploymentGradeError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Joining Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" [value]="selectedEmployee.dateOfJoining && selectedEmployee.dateOfJoining.slice(0, 10)" (change)="selectedEmployee.dateOfJoining = $event.target.value" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div [class]="['form-group' + (confirmError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Confirmation Date <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="date" [value]="selectedEmployee.dateOfConfirmation && selectedEmployee.dateOfConfirmation.slice(0, 10) || ''" (change)="selectedEmployee.dateOfConfirmation = $event.target.value" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="confirmError" class="text-right"><code>{{confirmError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">WP Issue Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" [value]="selectedEmployee.wpIssuedDate && selectedEmployee.wpIssuedDate.slice(0, 10) || ''" (change)="selectedEmployee.wpIssuedDate = $event.target.value" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">WP Expiry Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" [value]="selectedEmployee.wpExpiryDate && selectedEmployee.wpExpiryDate.slice(0, 10) || ''" (change)="selectedEmployee.wpExpiryDate = $event.target.value" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Bank Account</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.bankAccount" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Courses Done</label>
+                                        <div class="col-sm-7">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Course</th>
+                                                        <th style="width: 10%"><button type="button" (click)="selectedEmployee.courses.push('')" class="btn btn-primary" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of selectedEmployee.courses; index as i">
+                                                        <td><input type="text" (change)="selectedEmployee.courses[i] = $event.target.value" [value]="x" class="form-control rounded" [readonly]="!isEdit"></td>
+                                                        <td><button type="button" (click)="selectedEmployee.courses.splice(i, 1)" class="btn btn-danger" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#official-details">
+                                    Official
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="official-details" [class]="['panel-collapse collapse' + (userNameError ? ' show' : '')]">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div [class]="['form-group' + (userNameError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">User Name <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.userName" class="form-control rounded" [readonly]="!isEdit">
+                                            <div *ngIf="userNameError" class="text-right"><code>{{userNameError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Password</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="password" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">App Role <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <select (change)="[selectedEmployee.role = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                <option *ngFor="let x of roles" [value]="x" [selected]="x === selectedEmployee.role">{{x}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Profile Picture</label>
+                                        <div [hidden]="isEdit" class="col-sm-7">
+                                            <button *ngIf="selectedEmployee.fileId" (click)="download(selectedEmployee.fileId)" class="btn btn-primary">Download</button>
+                                            <span *ngIf="!selectedEmployee.fileId" class="control-label text-left">N/A</span>
+                                        </div>
+                                        <div [hidden]="!isEdit" class="col-sm-7">
+                                            <input type="file" (change)="this.profileImage = $event.target.files[0]" class="form-control rounded" accept=".jpeg,.jpg,.png">
+                                        </div>
+                                    </div>
+                                    <div [hidden]="isEdit" class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Employment Contract</label>
+                                        <div class="col-sm-7">
+                                            <button *ngIf="selectedEmployee.role === 'SO'" (click)="generateContract()" class="btn btn-primary">Download</button>
+                                            <span *ngIf="selectedEmployee.role !== 'SO'" class="control-label text-left">N/A</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Uniform Issue Status</label>
+                                        <div class="col-sm-7">
+                                            <select (change)="[selectedEmployee.uniformIssueStatus = $event.target.value]" class="form-control rounded" [disabled]="!isEdit">
+                                                <option value="" disabled>Choose Issue Status</option>
+                                                <option value="issued" [selected]="selectedEmployee.uniformIssueStatus === 'issued'">Issued</option>
+                                                <option value="returned" [selected]="selectedEmployee.uniformIssueStatus === 'returned'">Returned</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">NOK</label>
+                                        <div class="col-sm-7">
+                                            <input type="text" [(ngModel)]="selectedEmployee.nok" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Notification Add Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" (change)="selectedEmployee.notificationAddDate = $event.target.value" [value]="selectedEmployee.notificationAddDate && selectedEmployee.notificationAddDate.slice(0, 10) || ''" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Notification Cancel Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" (change)="selectedEmployee.notificationCancelDate = $event.target.value" [value]="selectedEmployee.notificationCancelDate && selectedEmployee.notificationCancelDate.slice(0, 10) || ''" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Resignation Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" (change)="selectedEmployee.resignationDate = $event.target.value" [value]="selectedEmployee.resignationDate && selectedEmployee.resignationDate.slice(0, 10) || ''" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Termination Date</label>
+                                        <div class="col-sm-7">
+                                            <input type="date" (change)="selectedEmployee.terminationDate = $event.target.value" [value]="selectedEmployee.terminationDate && selectedEmployee.terminationDate.slice(0, 10) || ''" class="form-control rounded" [readonly]="!isEdit">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#training-details">
+                                    Trainings Completed
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="training-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div *ngFor="let x of selectedEmployee.trainings" class="col-sm-6">
+                                        <div class="panel rounded shadow">
+                                            <div class="panel-body">
+                                                <div class="media mb-10">
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">{{x.title || 'N/A'}}</h4>
+                                                        <h6 class="text-muted h6 mt-5">{{ x.dateCompleted | date : 'dd/MM/yyyy' }}</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!selectedEmployee.trainings.length">N/A</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#vacation-details">
+                                    Vacation Balance
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="vacation-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div *ngFor="let x of vacations" class="col-sm-4">
+                                        <div class="panel rounded shadow">
+                                            <div class="panel-body">
+                                                <div class="media mb-10">
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">{{x.type}}</h4>
+                                                        <h6 class="text-muted h6 mt-5">Available {{x.assigned - x.used}} Used {{x.used}}</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#salary-details">
+                                    Salary Details
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="salary-details" class="panel-collapse collapse">
+                            <div class="panel-body">
+                		        <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">Basic Salary</label>
+                                        <div class="col-sm-2">${{salaryDetails.basicSalary || 0}}</div>
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">Grooming</label>
+                                        <div class="col-sm-2">${{salaryDetails.grooming || 0}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">Advance</label>
+                                        <div class="col-sm-2">${{salaryDetails.advance || 0}}</div>
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">Performance</label>
+                                        <div class="col-sm-2">${{salaryDetails.attendance || 0}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">PH</label>
+                                        <div class="col-sm-2">${{salaryDetails.ph || 0}}</div>
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3">Other Allowances</label>
+                                        <div class="col-sm-2">${{salaryDetails.others || 0}}</div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Payslip</label>
+                                        <div class="col-sm-7 no-padding">
+                                            <div class="col-sm-6">
+                                                <select class="form-control" (change)="selectedMonth = $event.target.value">
+                                                    <option value="" disabled>Select month</option>
+                                                    <option *ngFor="let x of months; index as i" [value]="i">{{x}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <button class="btn btn-primary btn-block" (click)="generate()">Download</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading no-border">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion-group" href="#management-details">
+                                    Employee Management
+                                </a>
+                            </h4>
+                        </div>
+                        <div *ngIf="isAdmin" id="management-details" [class]="['panel-collapse collapse' + (feedbackError ? ' show' : '')]">
+                            <div class="panel-body">
+                                <div class="form-horizontal form-bordered">
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Warning</label>
+                                        <div class="col-sm-7">
+                                            <div class="row">
+                                                <div class="col-sm-1">
+                                                    <div class="ckbox ckbox-danger">
+                                                        <input id="warning" type="checkbox" [(ngModel)]="isWarning">
+                                                        <label for="warning"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-11">
+                                                    <select class="form-control rounded" (change)="warning = $event.target.value" [disabled]="!isWarning">
+                                                        <option *ngFor="let x of warnings" [value]="x" [selected]="x === warning">{{x}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="warning !== 'Termination'" [class]="['form-group' + (feedbackConfirmError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Confirmation Date <span *ngIf="isWarning" class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="date" [value]="selectedEmployee.dateOfConfirmation && selectedEmployee.dateOfConfirmation.slice(0, 10) || ''" (change)="confirmDate = $event.target.value" class="form-control rounded" [readonly]="!isWarning">
+                                            <div *ngIf="feedbackConfirmError" class="text-right"><code>{{feedbackConfirmError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="warning === 'Termination'" class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Termination Date <span *ngIf="isWarning" class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <input type="date" [(ngModel)]="terminateDate" class="form-control rounded" [readonly]="!isWarning">
+                                        </div>
+                                    </div>
+                                    <div [class]="['form-group' + (feedbackError ? ' has-error' : '')]">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">Feedback <span class="asterisk">*</span></label>
+                                        <div class="col-sm-7">
+                                            <select class="form-control rounded" (change)="feedback = $event.target.value">
+                                                <option value="">Please select</option>
+                                                <option *ngFor="let x of feedbacks" [value]="x" [selected]="x === feedback">{{x}}</option>
+                                            </select>
+                                            <br *ngIf="feedback === 'Others' || feedback === 'Site Transfer'">
+                                            <select [class]="['form-control rounded' + (feedback !== 'Site Transfer' ? ' hide' : '')]" (change)="feedbackSite = $event.target.value">
+                                                <option value="">Please Select</option>
+                                                <option *ngFor="let x of sites | keyvalue" [value]="x.value.siteName" [selected]="x.value.siteName === feedbackSite">{{x.value.siteName}}</option>
+                                            </select>
+                                            <textarea [class]="['form-control rounded' + (feedback !== 'Others' ? ' hide' : '')]" [(ngModel)]="feedbackOthers"></textarea>
+                                            <div *ngIf="feedbackError" class="text-right"><code>{{feedbackError}}</code></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-1"></div>
+                                        <label class="col-sm-3 control-label text-left">History</label>
+                                        <div *ngIf="feedbackHistory.length" class="col-sm-7">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Feedback</th>
+                                                        <th>Employee</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let x of feedbackHistory; index as i" [class]="x.isWarning ? 'danger' : ''">
+                                                        <td>{{x.feedback}}</td>
+                                                        <td>{{userName(x.employeeId)}}</td>
+                                                        <td>{{ x.dateCreated | date : 'dd/MM/yyyy' }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <label *ngIf="!feedbackHistory.length" class="col-sm-7 control-label text-left">N/A</label>
+                                    </div>
+                                    <div clas="form-group">
+                                        <div class="col-sm-4"></div>
+                                        <div class="col-sm-7 text-right">
+                                            <button class="btn btn-primary" (click)="submitFeedback()">Provide Feedback</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="isAdmin || isOE" [class]="['panel panel-footer' + (deleteConfirm ? ' bg-danger' : '')]">
+                        <ul *ngIf="!deleteConfirm" class="pager wizard no-margin">
+                            <li class="previous"><a (click)="deleteConfirm = true">Delete</a></li>
+                            <li *ngIf="!isEdit" class="next"><a (click)="isEdit = true">Edit</a></li>
+                            <li *ngIf="isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                        </ul>
+                        <ul *ngIf="deleteConfirm" class="pager wizard no-margin">
+                            <li><h4><strong>Are you sure you want to delete this user?</strong></h4></li>
+                            <li class="previous"><a (click)="deleteConfirm = false">Deny</a></li>
+                            <li class="next"><a (click)="delete()">Confirm</a></li>
+                        </ul>
+                    </div>
+                </div>
+    		</div>
+            <div class="col-sm-2"></div>
+    	</div>
+    </div>
+</section>

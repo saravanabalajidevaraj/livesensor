@@ -1,0 +1,58 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel panel-tab rounded shadow">
+                        <div class="panel-heading no-padding">
+                            <div class="panel-title row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8 text-center report-title">Pending Items</div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content form-horizontal">
+                                <div *ngIf="learnings.length" class="row">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-10">
+                                        <label>ELearnings</label>
+                                        <div *ngFor="let x of learnings" class="row form-group">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-9">
+                                                <span><img [src]="image(x.notificationType)"></span>
+                                                <span> {{x.description}}. Please check.</span>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <button type="button" class="btn btn-primary" (click)="notificationView(x)">View</button>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="notifications.length" class="row">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-10">
+                                        <label>Notifications</label>
+                                        <div *ngFor="let x of notifications" class="row form-group">
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-9">
+                                                <span><img [src]="image(x.notificationType)"></span>
+                                                <span> {{x.description}}. Please check.</span>
+                                            </div>
+                                            <div class="col-sm-1">
+                                                <button type="button" class="btn btn-primary" (click)="notificationView(x)">View</button>
+                                            </div>
+                                            <div class="col-sm-1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>

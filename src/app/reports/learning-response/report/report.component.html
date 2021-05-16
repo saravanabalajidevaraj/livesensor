@@ -1,0 +1,89 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">User ELearning Submission</div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2 control-label text-left">User</label>
+                        <div class="col-sm-8">{{userName(report.userId)}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2 control-label text-left">Title</label>
+                        <div class="col-sm-8">{{eLearning.title}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2 control-label text-left">Details</label>
+                        <div class="col-sm-8" style="word-break: break-word;">{{eLearning.details}}</div>
+                    </div>
+                    <ul class="list-group">
+                        <li *ngFor="let x of report.learningData.solutions; index as i" class="list-group-item">
+                            <div class="row">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-1">Q{{i + 1}}.</div>
+                                <div class="col-sm-9">
+                                    <label>{{x.ques}}</label>
+                                    <br>
+                                    <div [ngSwitch]="x.type">
+                                        <textarea *ngSwitchCase="'subjective'" class="form-control rounded" [value]="x.answer" [readonly]="true"></textarea>
+                                        <div *ngSwitchCase="'single'">
+                                            <div *ngFor="let y of x.options; index as j" class="form-check">
+                                                <div class="rdio rdio-theme">
+                                                    <input type="radio" [id]="['ques-' + i + '-' + j]" [name]="['ques-' + i]" [checked]="y.isSelected" [disabled]="true">
+                                                    <label [for]="['ques-' + i + '-' + j]">{{y.value}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngSwitchCase="'multiple'">
+                                            <div *ngFor="let y of x.options; index as j" class="form-check">
+                                                <div class="ckbox ckbox-theme">
+                                                    <input type="checkbox" [id]="['ques-' + i + '-' + j]" [checked]="y.isSelected" [disabled]="true">
+                                                    <label [for]="['ques-' + i + '-' + j]">{{y.value}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div [class]="['form-group' + (resultError ? ' has-error' : '')]">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-2 control-label text-left">Submision Result</label>
+                        <div class="col-sm-8 no-padding">
+                            <div class="col-xs-4">
+                                <select class="form-group" class="form-control rounded" (change)="report.isFailed = $event.target.value === 'false'" [disabled]="!isApprove && !isEdit">
+                                    <option value="true" [selected]="!report.isFailed">Pass</option>
+                                    <option value="false" [selected]="report.isFailed">Fail</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-8">
+                                <input type="number" class="form-control rounded" [(ngModel)]="report.results" [readonly]="!isApprove && !isEdit">
+                                <div *ngIf="resultError" class="text-right"><code>{{resultError}}</code></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="!isApprove && !isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                    <li *ngIf="!isApprove && isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                    <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>

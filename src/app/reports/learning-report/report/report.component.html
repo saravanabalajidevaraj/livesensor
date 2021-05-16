@@ -1,0 +1,121 @@
+<div *ngIf="!!report">
+    <div class="panel rounded shadow no-overflow">
+        <div class="panel-heading text-center">
+            <label class="panel-title">{{report.title}}</label>
+        </div>
+        <div class="panel-body">
+            <div class="tab-content form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <label class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control rounded" [(ngModel)]="report.title" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <label class="col-sm-2 control-label">Details</label>
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control rounded" [(ngModel)]="report.details" [readonly]="!isEdit"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="report.fileId || isEdit" class="form-group">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <label class="col-sm-2 control-label">Document</label>
+                        <div [hidden]="!isEdit" class="col-sm-10">
+                            <input #fileUpload type="file" (change)="updateDocument($event.target.files[0])" class="form-control rounded" [readonly]="!isEdit">
+                        </div>
+                        <div [hidden]="isEdit" class="col-sm-10">
+                            <button type="button" class="btn btn-primary" (click)="downloadDoc()">Download</button>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="!isEdit" class="form-group">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <label class="col-sm-2 control-label">Notify Employees</label>
+                        <div class="col-sm-1">
+                            <div class="ckbox ckbox-theme">
+                                <input id="notify-emps" type="checkbox" [(ngModel)]="notifyUsers" [readonly]="!isEdit">
+                                <label for="notify-emps"></label>
+                            </div>
+                        </div>
+                        <div [hidden]="!notifyUsers" class="col-sm-9">
+                            <select class="form-control rounded" (change)="updateUserChoice($event.target.value)">
+                                <option value="all">Post To All</option>
+                                <option value="selected">Post To Selected Candidates</option>
+                            </select>
+                            <ejs-treeview #userTree class="well" [hidden]="userChoice === 'all'"
+                                [showCheckBox]='true' [sortOrder]="'Ascending'" [fields]="usersAsTree"></ejs-treeview>
+                        </div>
+                    </div>
+                </div>
+                <div *ngFor="let x of report.learningData.questions, index as i" class="form-group">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <label class="col-sm-2 control-label">[ {{x.type}} ] Q{{i + 1}}.</label>
+                        <div class="col-sm-10">
+                            <div class="row">
+                                <div class="col-sm-11">
+                                    <textarea type="text" class="form-control rounded" [(ngModel)]="report.learningData.questions[i].ques" [readonly]="!isEdit"></textarea>
+                                    <div *ngIf="x.type !== 'subjective'">
+                                        <table class="table table-bordered table-middle">
+                                            <thead>
+                                                <tr>
+                                                    <th>S/No</th>
+                                                    <th>Option</th>
+                                                    <th><button class="btn btn-primary" type="button" (click)="y.push('')" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let y of x.options; index as j" class="border-warning">
+                                                    <td>{{j + 1}}</td>
+                                                    <td><input type="text" class="form-control rounded" [(ngModel)]="report.learningData.questions[i].options[j]" [readonly]="!isEdit"></td>
+                                                    <td><button class="btn btn-danger" type="button" (click)="y.splice(j, 1)" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-danger" type="button" (click)="x.splice(i, 1)" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10 no-padding">
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary btn-block rounded" (click)="subjective()" [disabled]="!isEdit">Subjective Question</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary btn-block rounded" (click)="singleChoice()" [disabled]="!isEdit">Single Choice Question</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary btn-block rounded" (click)="multipleChoice()" [disabled]="!isEdit">Multiple Choice Question</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <ul class="pager wizard no-margin">
+                <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                <li *ngIf="!isApprove && !isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                <li *ngIf="!isApprove && isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

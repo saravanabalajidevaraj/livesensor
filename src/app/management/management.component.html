@@ -1,0 +1,36 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel-heading no-padding">
+                        <div class="panel-title row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 text-center report-title">Management</div>
+                        </div>
+                    </div>
+                    <div *ngIf="item" class="panel-body">
+                        <div class="tab-content form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Feedback</label>
+                                <label [class]="['col-sm-7 control-label text-left' + (item.isWarning ? ' text-danger' : '')]">{{item.feedback}}</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Date</label>
+                                <label class="col-sm-7 control-label text-left">{{ item.dateCreated | date : 'dd/MM/yyyy' }}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="noteId" class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li class="next"><a (click)="approve()">Acknowledge</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

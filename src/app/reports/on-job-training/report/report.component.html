@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">
+                        <img src="assets/img/ic_account_check.png">
+                        On Job Training
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Mentor</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.mentorId)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Trainee</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.traineeId)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Training Period</label>
+                        <div class="col-sm-7">
+                            <select class="form-control rounded" (change)="updatePeriod($event.target.value)" [disabled]="!isEdit">
+                                <option *ngFor="let x of periods" value="x" [selected]="x === report.trainingPeriod">{{x}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Images</label>
+                        <div class="col-sm-7">
+                            <img *ngFor="let x of report.images" class="well" [src]="imageFor(x.id)" alt="x.id" (click)="parseImage(x.id)">
+                            <label *ngIf="!report.images.length" class="control-label text-left">N/A</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Progress Report</label>
+                        <div class="col-sm-7">
+                            <div *ngFor="let x of report.trainingProgress.data; index as i" class="row">
+                                <label class="col-sm-7">{{x.competency}}</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control rounded" (change)="updateProgress(i, $event.target.value)" [disabled]="!isEdit">
+                                        <option *ngFor="let y of progressOptions" value="y" [selected]="y === x.progress">{{y}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Overall Score</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [(ngModel)]="report.overallRating" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Location</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [(ngModel)]="report.location" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Date</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control rounded" (change)="updateDate($event.target.value)" [value]="clientDate(report.trainingDate)" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Concerns</label>
+                        <div class="col-sm-7">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Concern</th>
+                                        <th><button (click)="report.areasOfConcern.data.push('')" class="btn btn-primary" [disabled]="!isEdit"><i class="fa fa-plus-circle"></i></button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let x of report.areasOfConcern.data; index as i">
+                                        <td><input type="text" class="form-control rounded" [(ngModel)]="report.areasOfConcern.data[i]" [readonly]="!isEdit"></td>
+                                        <td><button (click)="report.areasOfConcern.data.splice(i, 1)" class="btn btn-danger" [disabled]="!isEdit"><i class="fa fa-times-circle"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="!isApprove && !isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                    <li *ngIf="!isApprove && isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                    <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

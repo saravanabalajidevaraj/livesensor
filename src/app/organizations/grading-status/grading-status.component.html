@@ -1,0 +1,28 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="panel rounded shadow no-overflow">
+
+                    <!-- Full-width images with number text -->
+                    <div *ngFor="let x of pdfs; index as i" [class]="slideIndex !== i ? 'hide' : ''">
+                        <div class="page">{{i + 1}} / {{pdfs.length}}</div>
+                        <pdf-viewer [src]="pdfParsed[i]" [page]="1" [show-all]="false" [render-text]="true" [original-size]="false" [fit-to-page]="false"></pdf-viewer>
+                    </div>
+
+                    <!-- Next and previous buttons -->
+                    <a *ngIf="slideIndex !== 0" class="prev" (click)="slideIndex = slideIndex - 1">&#10094;</a>
+                    <a *ngIf="slideIndex !== pdfs.length - 1" class="next" (click)="slideIndex = slideIndex + 1">&#10095;</a>
+
+                    <!-- Image text -->
+                    <div class="caption-container">
+                        <p id="caption">{{pdfs[slideIndex]}}</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</section>

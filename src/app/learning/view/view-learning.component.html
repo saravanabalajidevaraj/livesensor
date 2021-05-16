@@ -1,0 +1,66 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div *ngIf="!!item" class="col-sm-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel-heading no-padding">
+                        <div class="panel-title row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 text-center report-title">{{item.title}}</div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-10 card">
+                                    <div class="card-body">
+                                        <h3 class="lead text-center">{{item.details}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="item.fileId" class="form-group">
+                                <div class="col-sm-12 text-center">
+                                    <button type="button" class="btn btn-primary" (click)="downloadDoc()">Download File</button>
+                                </div>
+                            </div>
+                            <ul class="list-group">
+                                <li *ngFor="let x of solutions; index as i" class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-sm-1"></div>
+                                        <div class="col-sm-1">Q{{i + 1}}.</div>
+                                        <div class="col-sm-9">
+                                            <label>{{x.ques}}</label>
+                                            <br>
+                                            <textarea *ngIf="x.type === 'subjective'" (change)="x.answer = $event.target.value" class="form-control rounded"></textarea>
+                                            <div *ngIf="x.type !== 'subjective'">
+                                                <div *ngFor="let y of x.options; index as j" class="form-check">
+                                                    <div *ngIf="x.type === 'single'" class="rdio rdio-theme">
+                                                        <input type="radio" [id]="['ques-' + i + '-' + j]" (change)="updateRadioOption(i, j, $event.target.checked)" [name]="['ques-' + i]">
+                                                        <label [for]="['ques-' + i + '-' + j]">{{y.value}}</label>
+                                                    </div>
+                                                    <div *ngIf="x.type === 'multiple'" class="ckbox ckbox-theme">
+                                                        <input type="checkbox" [id]="['ques-' + i + '-' + j]" (change)="y.isSelected = $event.target.checked">
+                                                        <label [for]="['ques-' + i + '-' + j]">{{y.value}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li class="next"><a (click)="submit()">Submit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,104 @@
+<div *ngIf="!!report">
+    <div class="panel rounded shadow no-overflow">
+        <div class="panel-heading no-padding">
+            <div class="panel-title row">
+                <div class="col-sm-2">
+                    <h4 *ngIf="holiday">
+                      <label style="color: orange;">{{holiday}}</label>
+                    </h4>
+                </div>
+                <div class="col-sm-8 text-center report-title">Attendance Report</div>
+                <div class="col-sm-2 text-right">
+                    <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="tab-content form-horizontal">
+            	<ul class="timeline timeline-horizontal">
+            		<li class="timeline-item">
+            			<div class="timeline-badge"><i class="fa fa-circle"></i></div>
+            			<div class="timeline-panel">
+            				<div class="timeline-heading">
+            					<h4 class="timeline-title">Start Work</h4>
+            				</div>
+            				<div *ngIf="isEdit || report.startTime" class="timeline-body">
+                        <img *ngIf="report.startImage" class="well" [src]="imageFor(report.startImage.id)" (click)="parseImage(report.startImage.id)">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input type="date" class="form-control" (change)="editDate('startTime', $event.target.value)" [value]="date('startTime')" [readonly]="!isEdit">
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="time" class="form-control" (change)="editTime('startTime', $event.target.value)" [value]="time('startTime')" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+            			</div>
+            		</li>
+            		<li class="timeline-item timeline-item-small">
+            			<div class="timeline-badge"><i class="fa fa-circle"></i></div>
+            			<div class="timeline-panel">
+            				<div class="timeline-heading">
+            					<h4 class="timeline-title">Start Break</h4>
+            				</div>
+                      <div *ngIf="isEdit || report.breakTime" class="timeline-body">
+                          <div class="form-group">
+                              <div class="col-xs-12">
+                                  <input type="date" class="form-control" (change)="editDate('breakTime', $event.target.value)" [value]="date('breakTime')" [readonly]="!isEdit">
+                              </div>
+                              <div class="col-xs-12">
+                                  <input type="time" class="form-control" (change)="editTime('breakTime', $event.target.value)" [value]="time('breakTime')" [readonly]="!isEdit">
+                              </div>
+                          </div>
+                      </div>
+            			</div>
+            		</li>
+            		<li class="timeline-item timeline-item-small">
+            			<div class="timeline-badge"><i class="fa fa-circle"></i></div>
+            			<div class="timeline-panel">
+            				<div class="timeline-heading">
+            					<h4 class="timeline-title">Resume Work</h4>
+            				</div>
+                    <div *ngIf="isEdit || report.resumeTime" class="timeline-body">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input type="date" class="form-control" (change)="editDate('resumeTime', $event.target.value)" [value]="date('resumeTime')" [readonly]="!isEdit">
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="time" class="form-control" (change)="editTime('resumeTime', $event.target.value)" [value]="time('resumeTime')" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+            			</div>
+            		</li>
+            		<li class="timeline-item">
+            			<div class="timeline-badge"><i class="fa fa-circle"></i></div>
+            			<div class="timeline-panel">
+            				<div class="timeline-heading">
+            					<h4 class="timeline-title">End Work</h4>
+            				</div>
+            				<div *ngIf="isEdit || report.endTime" class="timeline-body">
+                        <img *ngIf="report.endImage" class="well" [src]="imageFor(report.endImage.id)" (click)="parseImage(report.endImage.id)">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input type="date" class="form-control" (change)="editDate('endTime', $event.target.value)" [value]="date('endTime')" [readonly]="!isEdit">
+                            </div>
+                            <div class="col-xs-12">
+                                <input type="time" class="form-control" (change)="editTime('endTime', $event.target.value)" [value]="time('endTime')" [readonly]="!isEdit">
+                            </div>
+                        </div>
+                    </div>
+            			</div>
+            		</li>
+            	</ul>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <ul class="pager wizard no-margin">
+                <li class="previous"><a (click)="back()">Back</a></li>
+                <li *ngIf="!isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                <li *ngIf="isEdit" class="next"><a (click)="submit()">Submit</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

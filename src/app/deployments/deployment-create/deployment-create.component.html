@@ -1,0 +1,215 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel-body no-padding">
+                        <div class="form-horizontal form-bordered">
+                            <div class="form-group form-group-divider">
+                                <div class="form-inner">
+                                    <h3 class="no-margin">Site Specifications</h3>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (deploymentError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Date</label>
+                                <div class="col-sm-7">
+                                    <input type="date" [value]="date" (change)="changeDate($event.target.value)" class="form-control rounded">
+                                    <div *ngIf="deploymentError" class="text-right"><code>{{deploymentError}}</code></div>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (siteError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Site</label>
+                                <div class="col-sm-7" (change)="changeSite($event.target.value)">
+                                    <select class="form-control rounded">
+                                        <option value="" disabled>Please select</option>
+                                        <option *ngFor="let x of sites" [value]="x._id">{{x.siteName}}</option>
+                                    </select>
+                                    <div *ngIf="siteError" class="text-right"><code>{{siteError}}</code></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Address</label>
+                                <div class="col-sm-7">
+                                    <span *ngIf="site">{{site.address}}</span>
+                                    <span *ngIf="!site || !site.address">N/A</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Job Scope</label>
+                                <div class="col-sm-7">
+                                    <div *ngIf="site"><div *ngFor="let x of site.jobScope">{{x}}</div></div>
+                                    <span *ngIf="!site || site.jobScope.length === 0">N/A</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Job Scope Document</label>
+                                <div class="col-sm-7">
+                                    <button *ngIf="site && site.jobScopeDocId" class="btn btn-primary" (click)="downloadDoc()">Download</button>
+                                    <span *ngIf="!site || !site.jobScopeDocId">N/A</span>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-divider">
+                                <div class="form-inner">
+                                    <h3 class="no-margin">AM Shift Deploment</h3>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (amBreakError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Break Time</label>
+                                <div class="col-sm-7 no-padding">
+                                    <label class="col-sm-2 control-label text-left">From:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control rounded" (change)="amBreakStart = $event.target.value">
+                                            <option value="" disabled>Please select</option>
+                                            <option *ngFor="let x of timeOptions" [value]="x">{{x}}</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label text-left">To:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control rounded" (change)="amBreakEnd = $event.target.value">
+                                            <option value="" disabled>Please select</option>
+                                            <option *ngFor="let x of timeOptions" [value]="x">{{x}}</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="amBreakError" class="col-sm-12 text-right"><code>{{amBreakError}}</code></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Remarks</label>
+                                <div class="col-sm-7">
+                                    <input type="text" [(ngModel)]="amRemarks" class="form-control rounded">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <table class="table table-middle table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><label>Officer</label></th>
+                                                <th><label>Grade</label></th>
+                                                <th><label>Description</label></th>
+                                                <th><label>OJT Training</label></th>
+                                                <th><label>Standby</label></th>
+                                                <th><button class="btn btn-primary" (click)="amPending = true; pmPending = false"><i class="fa fa-plus-circle"></i></button></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let x of amDeployments; index as i">
+                                                <td>{{displayName(x.id)}}</td>
+                                                <td>{{userGrade(x.id)}}</td>
+                                                <td><input type="text" [(ngModel)]="amDeployments[i].description" class="form-control rounded"></td>
+                                                <td>{{userTraining(x.id)}}</td>
+                                                <td>
+                                                    <div class="ckbox ckbox-theme">
+                                                        <input [id]="['am-ckbox-' + i]" type="checkbox" [(ngModel)]="amDeployments[i].onStandBy">
+                                                        <label [for]="['am-ckbox-' + i]"></label>
+                                                    </div>
+                                                </td>
+                                                <td><button class="btn btn-danger" (click)="userRemove(amDeployments, i)"><i class="fa fa-times-circle"></i></button></td>
+                                            </tr>
+                                            <tr *ngIf="amPending">
+                                                <td colspan="5">
+                                                    <select class="form-control rounded" (change)="userSelect(amDeployments, $event.target.value)">
+                                                        <option value="" disabled>Please Select</option>
+                                                        <option *ngFor="let x of soUsers" [value]="x">{{userName(x)}}</option>
+                                                    </select>
+                                                </td>
+                                                <td><button class="btn btn-danger" (click)="amPending = false"><i class="fa fa-times-circle"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-divider">
+                                <div class="form-inner">
+                                    <h3 class="no-margin">PM Shift Deploment</h3>
+                                </div>
+                            </div>
+                            <div [class]="['form-group' + (pmBreakError ? ' has-error' : '')]">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Break Time</label>
+                                <div class="col-sm-7 no-padding">
+                                    <label class="col-sm-2 control-label text-left">From:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control rounded" (change)="pmBreakStart = $event.target.value">
+                                            <option value="" disabled>Please select</option>
+                                            <option *ngFor="let x of timeOptions" [value]="x">{{x}}</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label text-left">To:</label>
+                                    <div class="col-sm-4">
+                                        <select class="form-control rounded" (change)="pmBreakEnd = $event.target.value">
+                                            <option value="" disabled>Please select</option>
+                                            <option *ngFor="let x of timeOptions" [value]="x">{{x}}</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="pmBreakError" class="col-sm-12 text-right"><code>{{pmBreakError}}</code></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Remarks</label>
+                                <div class="col-sm-7">
+                                    <input type="text" [(ngModel)]="pmRemarks" class="form-control rounded">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <table class="table table-middle table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th><label>Officer</label></th>
+                                                <th><label>Grade</label></th>
+                                                <th><label>Description</label></th>
+                                                <th><label>OJT Training</label></th>
+                                                <th><label>Standby</label></th>
+                                                <th><button class="btn btn-primary" (click)="pmPending = true; amPending = false"><i class="fa fa-plus-circle"></i></button></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let x of pmDeployments; index as i">
+                                                <td>{{displayName(x.id)}}</td>
+                                                <td>{{userGrade(x.id)}}</td>
+                                                <td><input type="text" [(ngModel)]="pmDeployments[i].description" class="form-control rounded"></td>
+                                                <td>{{userTraining(x.id)}}</td>
+                                                <td>
+                                                    <div class="ckbox ckbox-theme">
+                                                        <input [id]="['pm-ckbox-' + i]" type="checkbox" [(ngModel)]="pmDeployments[i].onStandBy">
+                                                        <label [for]="['pm-ckbox-' + i]"></label>
+                                                    </div>
+                                                </td>
+                                                <td><button class="btn btn-danger" (click)="userRemove(pmDeployments, i)"><i class="fa fa-times-circle"></i></button></td>
+                                            </tr>
+                                            <tr *ngIf="pmPending">
+                                                <td colspan="5">
+                                                    <select class="form-control rounded" (change)="userSelect(pmDeployments, $event.target.value)">
+                                                        <option value="" disabled>Please Select</option>
+                                                        <option *ngFor="let x of soUsers" [value]="x">{{userName(x)}}</option>
+                                                    </select>
+                                                </td>
+                                                <td><button class="btn btn-danger" (click)="pmPending = false"><i class="fa fa-times-circle"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="submitEnabled" class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li class="next"><a (click)="submit()">Add Deployment</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</section>

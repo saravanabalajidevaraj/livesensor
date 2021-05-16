@@ -1,0 +1,50 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div *ngIf="!!item" class="col-sm-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel-heading no-padding">
+                        <div class="panel-title row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 text-center report-title">{{item.title}}</div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tab-content form-horizontal">
+                            <div *ngIf="item.details" class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Details</label>
+                                <div class="col-sm-7 control-label text-left">{{item.details}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Location</label>
+                                <div class="col-sm-7 control-label text-left">{{item.location}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Date</label>
+                                <div class="col-sm-7 control-label text-left">{{ item.fromDate | date : 'dd/MM/yyyy' }}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-3 control-label text-left">Time</label>
+                                <div class="col-sm-7 control-label text-left">
+                                    {{ item.fromDate | date : 'HH:mm' }} - {{ item.toDate | date : 'HH:mm' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                            <li *ngIf="isApprove" class="next"><a (click)="approve()">Acknowledge</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</section>

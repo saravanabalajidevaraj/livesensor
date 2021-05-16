@@ -1,0 +1,25 @@
+<div class="panel panel-tab">
+    <div class="panel-heading">
+        <div class="pull-left">
+            <ul class="nav nav-tabs">
+                <li class="nav-border">
+                    <a [routerLink]="['/vacation', {outlets: {vacation: 'summary'}}]" class="text-center">Remaining Balance</a>
+                </li>
+                <li class="nav-border">
+                    <a [routerLink]="['/vacation', {outlets: {vacation: 'vacation'}}]" class="text-center">Vacations</a>
+                </li>
+                <li class="nav-border">
+                    <a [routerLink]="['/vacation', {outlets: {vacation: 'overtime'}}]" class="text-center">Overtime</a>
+                </li>
+            </ul>
+		</div>
+        <div *ngIf="users.size && (isOE || isAdmin)" class="pull-right">
+            <div class="form-group no-margin">
+                <select (change)="changeUser(userFor($event.target.value))" class="form-control rounded">
+                    <option *ngFor="let x of userIds" [value]="x" [selected]="x === user._id">{{userName(x)}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

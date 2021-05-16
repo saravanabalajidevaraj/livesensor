@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-md-2"></div>
+    <div *ngIf="!!report" class="col-md-8">
+        <div class="panel rounded shadow no-overflow">
+            <div class="panel-heading no-padding">
+                <div class="panel-title row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8 text-center report-title">
+                        <img src="assets/img/ic_refresh.png">
+                        Refresher Training
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm rounded" (click)="exportAsPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="tab-content form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Conducted By</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [value]="userName(report.conductedBy)" [readonly]="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Training Topic</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control rounded" [(ngModel)]="report.trainingTopic" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Training Date</label>
+                        <div class="col-sm-7">
+                            <input type="date" class="form-control rounded" (change)="updateDate($event.target.value)" [value]="clientDate(report.trainingDate)" [readonly]="!isEdit">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Training Duration</label>
+                        <div class="col-sm-7">
+                            <select class="form-control rounded" (change)="updateDuration($event.target.value)" [disabled]="!isEdit">
+                                <option *ngFor="let x of durations" [value]="x" [selected]="x === report.trainingDuration">{{x}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Images</label>
+                        <div class="col-sm-7">
+                            <img *ngFor="let x of report.images" class="well" [src]="imageFor(x.id)" alt="x.id" (click)="parseImage(x.id)">
+                            <span *ngIf="!report.images.length">N/A</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-1"></div>
+                        <label class="col-sm-3 control-label text-left">Security Officers</label>
+                        <div class="col-sm-7">
+                            <input *ngFor="let x of report.attendees" type="text" class="form-control rounded" [value]="userName(x)" [readonly]="true">
+                            <label *ngIf="!report.attendees.length" class="control-label text-left">N/A</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="pager wizard no-margin">
+                    <li *ngIf="!isApprove" class="previous"><a (click)="back()">Back</a></li>
+                    <li *ngIf="!isApprove && !isEdit" class="next"><a (click)="edit()">Edit</a></li>
+                    <li *ngIf="!isApprove && isEdit" class="next"><a (click)="submit()">Submit</a></li>
+                    <li *ngIf="isApprove && !isEdit" class="next"><a (click)="approve()">Acknowledge</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>

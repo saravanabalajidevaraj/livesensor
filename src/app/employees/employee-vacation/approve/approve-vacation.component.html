@@ -1,0 +1,94 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="panel rounded shadow no-overflow">
+                    <div class="panel-heading no-padding">
+                        <div class="panel-title row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 text-center report-title">Approve Vacation</div>
+                        </div>
+                    </div>
+                    <div *ngIf="!!report" class="panel-body">
+                        <div class="tab-content form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 text-right">Employee</label>
+                                <div class="col-sm-6">{{userName(report.employeeId)}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 text-right">Approver</label>
+                                <div class="col-sm-6">{{userName(user._id)}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 text-right">HR</label>
+                                <div *ngIf="hr" class="col-sm-6">{{userName(hr._id)}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 text-right">Vacation Type</label>
+                                <div *ngIf="!!vacationTypes" class="col-sm-6">{{vacationType(report.leaveTypeCode)}}</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 control-label">From</label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" [value]="report.fromDate.slice(0, 10)" readonly="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 control-label">To</label>
+                                <div class="col-sm-6">
+                                    <input type="date" class="form-control" [value]="report.toDate.slice(0, 10)" readonly="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 text-right">Duration</label>
+                                <div class="col-sm-6">{{report.duration}} Day(s)</div>
+                            </div>
+                            <div *ngIf="!isPending" class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 text-right">Status</label>
+                                <div class="col-sm-6">{{report.status}}</div>
+                            </div>
+                            <div *ngIf="report.images" class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 control-label">Images</label>
+                                <div class="col-sm-6">
+                                    <img *ngFor="let x of report.images" class="well" [src]="imageFor(x.id)" alt="x.id" (click)="parseImage(x.id)">
+                                    <label *ngIf="!report.images.length" class="control-label">N/A</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 control-label">Comments</label>
+                                <div class="col-sm-6">
+                                    <textarea class="form-control rounded" [(ngModel)]="report.comments"></textarea>
+                                </div>
+                            </div>
+                            <div *ngIf="report.fileId" class="form-group">
+                                <div class="col-sm-1"></div>
+                                <label class="col-sm-4 control-label">Attachment</label>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-primary" (click)="download()">Download</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="isPending" class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li class="previous"><a (click)="reject()">Reject</a></li>
+                            <li class="next"><a (click)="approve()">Approve</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</section>

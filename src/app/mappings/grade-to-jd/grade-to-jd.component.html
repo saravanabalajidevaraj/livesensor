@@ -1,0 +1,49 @@
+<section id="page-content">
+    <div class="body-content animated fadeIn">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="panel">
+                    <div class="panel-heading no-padding">
+                        <div class="panel-title row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-8 text-center report-title">Grade to Job Description</div>
+                        </div>
+                    </div>
+                    <div class="panel-body no-padding">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-middle table-lilac">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 21%;">Grade</th>
+                                        <th>Job Description</th>
+                                        <th style="width: 11%;"><button class="btn btn-primary" (click)="addMapping()"><i class="fa fa-plus-circle"></i></button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-template ngFor let-x let-i="index" [ngForOf]="mappings">
+                                        <tr [class]="errors[i] ? 'has-error' : ''">
+                                            <td><input type="text" [(ngModel)]="mappings[i].grade" class="form-control"></td>
+                                            <td><input type="text" [(ngModel)]="mappings[i].jobDescription" class="form-control"></td>
+                                            <td><button class="btn btn-danger" (click)="removeMapping(i)"><i class="fa fa-times-circle"></i></button></td>
+                                        </tr>
+                                        <tr *ngIf="errors[i]">
+                                            <td colspan="2" class="text-right"><code>{{errors[i]}}</code></td>
+                                            <td></td>
+                                        </tr>
+                                    </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="pager wizard no-margin">
+                            <li class="next"><a (click)="submit()">Submit</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,10 @@
+﻿<!-- main app container -->
+<div>
+    <app-header *ngIf="showHead"></app-header>
+    <app-sidebar *ngIf="showHead"></app-sidebar>
+
+    <router-outlet></router-outlet>
+
+    <ng2-toasty [position]="'bottom-center'"></ng2-toasty>
+    <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="large" color="#fff" type="ball-atom"></ngx-spinner>
+</div>
