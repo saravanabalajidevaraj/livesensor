@@ -54,6 +54,10 @@ img {
   outline: none;
 }
 
+h1{
+  text-transform: uppercase;
+  font-size: 25px;
+}
 .clearfix::after {
   content: "";
   display: table;
@@ -64,7 +68,7 @@ img {
   position: relative;
   height: 100vh;
   width: 1194px;
-  background: url("https://i.ibb.co/RhMZprS/jony-Image2-1.png") no-repeat center center scroll;
+  /*background: url("assets/img/login.jpg") no-repeat center center scroll;*/
   background-size: cover;
   float: left;
   -webkit-animation: bgslide 2.3s forwards;
@@ -142,22 +146,18 @@ img {
   border-radius: 10px;
 }
 .login .container .login-form form button[type=submit] {
-  background: -webkit-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
-  background: -o-linear-gradient(110deg, #f794a4 0%, #fdd6bd 100%);
-     background: linear-gradient(
--20deg
-, #2196f3 0%, #0e5690 100%);
+  background: #b9aa5b;
   border: none;
   margin-top: 14px;
   margin-bottom: 20px;
-  width: 241px;
+ /* width: 241px;*/
   height: 58px;
   text-transform: uppercase;
   color: white;
-  border-radius: 10px;
+  border-radius: 30px;
   position: relative;
   z-index: 2;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 20px;
 }
 .login .container .login-form form button[type=submit]:hover::after {
@@ -167,7 +167,7 @@ img {
   content: "";
   position: absolute;
   z-index: -1;
-  border-radius: 10px;
+ border-radius: 30px;
   opacity: 0;
   top: 0;
   left: 0;
@@ -176,14 +176,13 @@ img {
   transition: 0.3s ease-in-out;
   right: 0;
   bottom: 0;
-  background: -webkit-gradient(linear, left bottom, left top, from(#09203f), to(#537895));
-  background: -webkit-linear-gradient(bottom, #09203f 0%, #537895 100%);
-  background: -o-linear-gradient(bottom, #09203f 0%, #537895 100%);
-  background: linear-gradient(to top, #09203f 0%, #537895 100%);
+   background: #b9aa5b;
 }
 .login .container .remember-form {
   position: relative;
   margin-top: -30px;
+  width: 50%;
+  float: left;
 }
 .login .container .remember-form input[type=checkbox] {
   margin-top: 9px;
@@ -192,14 +191,25 @@ img {
   font-size: 18px;
   font-weight: normal;
   position: absolute;
-  top: 32px;
-  color: #3B3B3B;
+  top: 25px;
+  color: #a3bbe2;
   margin-left: 15px;
+}
+
+.forgetss{
+ width: 100%;
+ display:inline-block;
+ margin-top: 10px;
 }
 .login .container .forget-pass {
   position: absolute;
   right: 0;
-  margin-top: 189px;
+   color: #a3bbe2!important;
+
+
+     width: 50%;
+    text-align: end;
+    float: right;
 }
 .login .container .forget-pass a {
   font-size: 16px;
@@ -268,7 +278,7 @@ img {
   }
   .bg-illustration {
     float: none;
-    background: url("https://i.ibb.co/rwncw7s/bg-mobile.png") center center;
+   /* background: url("https://i.ibb.co/rwncw7s/bg-mobile.png") center center;*/
     background-size: cover;
     -webkit-animation: slideIn 0.8s ease-in-out forwards;
             animation: slideIn 0.8s ease-in-out forwards;
@@ -282,28 +292,8 @@ img {
     margin: 20px auto !important;
     text-align: center;
   }
-  .bg-illustration .burger-btn {
-    left: 33px;
-    top: 29px;
-    display: block;
-    position: absolute;
-  }
-  .bg-illustration .burger-btn span {
-    display: block;
-    height: 4px;
-    margin: 6px;
-    background-color: #fff;
-  }
-  .bg-illustration .burger-btn span:nth-child(1) {
-    width: 37px;
-  }
-  .bg-illustration .burger-btn span:nth-child(2) {
-    width: 28px;
-  }
-  .bg-illustration .burger-btn span:nth-child(3) {
-    width: 20px;
-  }
-
+  
+  
   .login {
     float: none;
     margin: 0 auto;
@@ -331,7 +321,7 @@ img {
   }
   .login .container .login-form .remember-form {
     position: relative;
-    margin-top: -14px;
+    margin-top: -21px;
   }
   .login .container .login-form .remember-form span {
     font-size: 16px;
@@ -339,13 +329,6 @@ img {
     top: inherit;
   }
 
-  .forget-pass {
-    position: absolute;
-    right: inherit;
-    left: 0;
-    bottom: -40px;
-    margin: 0 !important;
-  }
   .forget-pass a {
     font-size: 16px;
     position: relative;
@@ -373,28 +356,61 @@ img {
     opacity: 1;
   }
 }
+.parent 
+{
+ background: url('assets/img/login.jpg');
+   background-repeat: no-repeat;
+ 
+       background-size: 85% 100%;
+  }
+
+  .login input[type="text"], .login input[type="password"],.login select{
+    border-radius: 0px!important;
+    border-left:6px solid!important; 
+    text-transform: uppercase;
+    color: #000;
+    font-weight: bolder;
+  }
+
+  ::placeholder {
+
+   font-weight: bolder;
+}
+
+
+@media  (min-width: 300px)  and (max-width: 928px) {
+.bg-illustration {
+  display: none;
+}
+.login-form {
+  margin-top: 40px!important;
+}
+
+.login button{
+  margin-top: 30px!important;
+}
+}
   </style>
          
 
-           <div class="parent clearfix">
-    <div class="bg-illustration">
+           <div class="parent clearfix" style="">
+    <div class="bg-illustration" >
      <!--  <img src="https://i.ibb.co/Pcg0Pk1/logo.png" alt="logo"> -->
 
-      <div class="burger-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
+    
     </div>
     
     <div class="login">
       <div class="container">
-        <h1>Member Login</h1>
+        <div style="text-align: center;">
+        <h1>Member Area</h1>
+         <h4 style="color: #bfbfbf;">Your Completely Security Solution</h4>
+       </div>
     
         <div class="login-form">
           <form class="sign-in"  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <input type="text" placeholder="User Name"  name="userName" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+            <input type="text" placeholder="IC Number"  name="userName" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+
 <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                         <div *ngIf="f.userName.errors.required">Username is required</div>
                     </div>
@@ -409,16 +425,18 @@ img {
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
                     </div>
-
-           <!--  <div class="remember-form">
+             
+             <div class="forgetss">
+            <div class="remember-form">
               <input type="checkbox">
-              <span>Remember me</span>
-            </div> -->
-           <!--  <div class="forget-pass">
-              <a href="#">Forgot Password ?</a>
-            </div> -->
+              <span>keep Signed in</span>
+            </div>
+            <div class="forget-pass">
+              <a href="#" style="color: #a3bbe2;">Forgot Password ?</a>
+            </div>
+          </div>
 
-            <button type="submit" id="login-btn">LOG-IN</button>
+            <button type="submit" id="login-btn">LOGIN</button>
 
           </form>
         </div>
@@ -429,52 +447,4 @@ img {
 
 
                   
-           
-
-<!-- <div id="sign-wrapper">
-
-  
-    <div class="brand">
-        <img src="assets/img/lssLogo.jpg" alt="Brand Logo"/>
-    </div>
    
-       
-
-   
-    <form class="sign-in form-horizontal shadow rounded no-overflow" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
-        <div class="sign-header">
-            <div class="form-group">
-                <div class="sign-text">
-                    <span>Members Area</span>
-                </div>
-            </div>
-        </div>
-        <div class="sign-body">
-            <div class="form-group">
-                <div class="input-group input-group-lg rounded no-overflow">
-                    <input type="text" class="form-control rounded input-sm" placeholder="IC Number" name="userName" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
-                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-                        <div *ngIf="f.userName.errors.required">Username is required</div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group input-group-lg rounded no-overflow">
-                    <input type="password" class="form-control rounded input-sm" placeholder="Password" name="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="sign-footer">
-            <div class="form-group">
-                <button type="submit" class="btn btn-theme btn-lg btn-block no-margin rounded" id="login-btn">Sign In</button>
-            </div>
-        </div>
-    </form>
-   
-
-</div> -->

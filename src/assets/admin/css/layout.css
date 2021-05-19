@@ -842,7 +842,7 @@ body.page-footer-fixed #page-content .footer-content {
   position: relative;
 }
 .header-left .navbar-header {
-  height: 51px;
+  height: 101px;
   width: 220px;
   left: 0;
 }
@@ -892,16 +892,19 @@ body.page-footer-fixed #page-content .footer-content {
   margin-bottom: 0px;
   background-color: #ffffff;
 }
+
 .navbar-toolbar .navbar-left .navbar-minimize {
   border-right: 1px solid #dddddd;
 }
 .navbar-toolbar .navbar-left .navbar-minimize a {
   padding-top: 16px;
   padding-bottom: 13px;
+
 }
 .navbar-toolbar .navbar-left .navbar-minimize a i {
   font-size: 24px;
   margin-top: -3px;
+  color: #7b1418;
 }
 .navbar-toolbar .navbar-left .navbar-search .trigger-search {
   font-size: 22px;
@@ -1867,11 +1870,12 @@ body.page-footer-fixed #page-content .footer-content {
   width: 220px;
   float: left;
   z-index: 200;
+  margin-top: 60px;
   position: absolute;
-  background-color: #2a2a2a;
+  background-color: #fff;  
 }
 #sidebar-left:after {
-  background-color: #2a2a2a;
+  background-color: #fff;
   position: fixed;
   height: 100%;
   top: 0px;
@@ -2021,14 +2025,15 @@ body.page-footer-fixed #page-content .footer-content {
 .sidebar-content {
   position: relative;
   padding: 15px 10px;
-  border-bottom: 2px solid #373737;
+ border-bottom: 2px solid #d9d9da;
   min-height: 81px;
 }
 .sidebar-content .media-heading {
   color: #777777;
 }
 .sidebar-content .media-heading span {
-  color: #d0d0d0;
+  color: #000000;
+  font-weight: 600;
 }
 .sidebar-content small {
   color: #777777;
@@ -2275,7 +2280,7 @@ body.page-footer-fixed #page-content .footer-content {
   border-bottom: 1px solid #373737;
 }
 .sidebar-menu > li > ul > li > a:hover {
-  background-color: #000000;
+  background-color: #ececec;
 }
 .sidebar-menu > li > ul > li > a > .text {
   min-width: 110px;
@@ -2343,14 +2348,14 @@ body.page-footer-fixed #page-content .footer-content {
 .sidebar-menu ul {
   margin: 0;
   padding: 0;
-  background-color: #1d1d1d;
+  background-color: #c0b36a;
   list-style: none;
 }
 .sidebar-menu ul li {
   position: relative;
 }
 .sidebar-menu ul li:after {
-  background-color: #2a2a2a;
+  background-color: #eeeeef;
 }
 .sidebar-menu ul li a {
   font-size: 12px;
@@ -2358,7 +2363,7 @@ body.page-footer-fixed #page-content .footer-content {
   padding: 8px 0 8px 22px;
   display: block;
   text-transform: capitalize;
-  color: #777777;
+  color: #fbfbfb;
 }
 .sidebar-menu ul li a:hover {
   color: #b7b7b7;
@@ -2394,7 +2399,7 @@ body.page-footer-fixed #page-content .footer-content {
   line-height: 40px;
   margin: 0px;
   text-transform: uppercase;
-  background-color: #323232;
+  background-color: #eeeeef;;
   color: #7f7f7f;
 }
 /* ========================================================================
@@ -3341,13 +3346,13 @@ body.page-footer-fixed #page-content .footer-content {
 .sidebar-box .sidebar-menu > li > a > .icon:after,
 .sidebar-rounded .sidebar-menu > li > a > .icon:after,
 .sidebar-circle .sidebar-menu > li > a > .icon:after {
-  border: 1px solid #373737;
+  border: 1px solid #e2e2e2;
 }
 .sidebar-box .sidebar-menu > li > a > .icon i,
 .sidebar-rounded .sidebar-menu > li > a > .icon i,
 .sidebar-circle .sidebar-menu > li > a > .icon i {
-  border: 2px solid #373737;
-  background-color: #222222;
+  border: 2px solid #e2e2e2;
+  background-color: #ffffff;
 }
 .sidebar-box .sidebar-menu > li > ul:after,
 .sidebar-rounded .sidebar-menu > li > ul:after,
@@ -3363,7 +3368,7 @@ body.page-footer-fixed #page-content .footer-content {
   left: 26px;
   top: 13px;
   bottom: auto;
-  border-color: rgba(0, 0, 0, 0);
+  border-color: rgb(238 238 239);
   -webkit-transition: all 0.5s ease-in-out 0s;
   -moz-transition: all 0.5s ease-in-out 0s;
   -ms-transition: all 0.5s ease-in-out 0s;
@@ -3371,7 +3376,7 @@ body.page-footer-fixed #page-content .footer-content {
   transition: all 0.5s ease-in-out 0s;
   -webkit-box-shadow: 0 0 0 2px #373737;
   -moz-box-shadow: 0 0 0 2px #373737;
-  box-shadow: 0 0 0 2px #373737;
+  box-shadow: 0 0 0 2px #c1c1c3;
 }
 .sidebar-box .sidebar-menu > li > ul > li a:before,
 .sidebar-rounded .sidebar-menu > li > ul > li a:before,

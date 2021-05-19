@@ -5,9 +5,10 @@
 export const environment = {
   production: false,
   //apiUrl: 'http://localhost:4000'
-//  apiUrl: 'http://localhost:4000/api/v1'
-
- apiUrl:'https://lss-project.herokuapp.com'
+  apiUrl: 'http://localhost:4000/api/v1'
+//apiUrl:'http://168.119.159.183:4300/api'
+  // apiUrl:'https://lss-project.herokuapp.com'
+  
 };
 
 /*
