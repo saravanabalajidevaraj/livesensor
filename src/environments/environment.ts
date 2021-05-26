@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'http://localhost:4000'
-  apiUrl: 'http://localhost:4000/api/v1'
+  apiUrl: 'http://localhost:4000'
+  // apiUrl:'http://3.138.245.105:4000'
+ // apiUrl:'http://172.31.47.135:4000'
+//  apiUrl: 'http://localhost:4000/api/v1'
 //apiUrl:'http://168.119.159.183:4300/api'
   // apiUrl:'https://lss-project.herokuapp.com'
   

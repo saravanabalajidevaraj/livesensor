@@ -57,6 +57,7 @@ img {
 h1{
   text-transform: uppercase;
   font-size: 25px;
+  color: #000;
 }
 .clearfix::after {
   content: "";
@@ -144,9 +145,11 @@ h1{
   border: none;
   padding: 0 30px;
   border-radius: 10px;
+  color: #000!important;
+  font-weight: 600;
 }
 .login .container .login-form form button[type=submit] {
-  background: #b9aa5b;
+  background: #000;
   border: none;
   margin-top: 14px;
   margin-bottom: 20px;
@@ -159,9 +162,10 @@ h1{
   z-index: 2;
   font-weight: normal;
   font-size: 20px;
+  font-weight: 600;
 }
 .login .container .login-form form button[type=submit]:hover::after {
-  opacity: 1;
+  opacity: 0.6;
 }
 .login .container .login-form form button[type=submit]::after {
   content: "";
@@ -192,7 +196,7 @@ h1{
   font-weight: normal;
   position: absolute;
   top: 25px;
-  color: #a3bbe2;
+  color: #808080;
   margin-left: 15px;
 }
 
@@ -204,7 +208,7 @@ h1{
 .login .container .forget-pass {
   position: absolute;
   right: 0;
-   color: #a3bbe2!important;
+   color: #808080!important;
 
 
      width: 50%;
@@ -373,12 +377,15 @@ h1{
   }
 
   ::placeholder {
-
+       color: #000!important;
    font-weight: bolder;
 }
 
 
 @media  (min-width: 300px)  and (max-width: 928px) {
+  .parent {
+    background: #fff;
+  }
 .bg-illustration {
   display: none;
 }
@@ -404,22 +411,28 @@ h1{
       <div class="container">
         <div style="text-align: center;">
         <h1>Member Area</h1>
-         <h4 style="color: #bfbfbf;">Your Completely Security Solution</h4>
+         <h4 style="color: #bfbfbf;">"Your Preferred Partner in Security Solution"</h4>
        </div>
     
         <div class="login-form">
           <form class="sign-in"  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+
+          <select name="role" id="role">
+            <option value="">Select Role</option>
+            <option value="founder">Founder</option>
+            <option value="hr">HR</option>
+            <option value="Admin">Admin</option>
+            <option value="Supervisor">Supervisor</option>
+            <option value="employee">Employee</option>
+          </select>
+
             <input type="text" placeholder="IC Number"  name="userName" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
 
 <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
                         <div *ngIf="f.userName.errors.required">Username is required</div>
                     </div>
-             <select name="role" id="role" disabled="">
-    <option value="">Select Role</option>
-    <option value="Admin">Admin</option>
-    <option value="User">User</option>
-   
-  </select>
+             
 
             <input type="password" class="" placeholder="Password" name="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -432,7 +445,7 @@ h1{
               <span>keep Signed in</span>
             </div>
             <div class="forget-pass">
-              <a href="#" style="color: #a3bbe2;">Forgot Password ?</a>
+              <a href="#" style="color: #808080;">Forgot Password ?</a>
             </div>
           </div>
 

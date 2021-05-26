@@ -47,7 +47,7 @@
  * HEADER
  * ======================================================================== */
 body.page-sidebar-minimize #header .navbar-minimize > a {
-  background-color: #81b71a;
+  background-color: #2b333e;
   color: #ffffff;
 }
 body.page-sidebar-minimize #header .navbar-minimize:hover > a {
@@ -55,6 +55,7 @@ body.page-sidebar-minimize #header .navbar-minimize:hover > a {
 }
 #header .navbar-header {
       background-color: #7b1418;
+      border-bottom: 1px solid #222933;
 }
 /* ========================================================================
  * SIDEBAR LEFT & RIGHT
@@ -93,12 +94,12 @@ body.page-sidebar-minimize #header .navbar-minimize:hover > a {
  * ======================================================================== */
 body.page-sidebar-minimize .navbar-minimize,
 body.page-sidebar-minimize-auto .navbar-minimize {
-  border-right: 1px solid #81b71a !important;
+ /* border-right: 1px solid #81b71a !important;*/
 }
 body.page-sidebar-minimize .navbar-minimize a,
 body.page-sidebar-minimize-auto .navbar-minimize a {
-  background-color: #81b71a;
-  border-bottom: 1px solid #81b71a;
+  background-color:#81b71a;
+  border-bottom: 1px solid #2b333e;
 }
 body.page-sidebar-minimize .navbar-minimize a:hover,
 body.page-sidebar-minimize-auto .navbar-minimize a:hover {

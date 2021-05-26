@@ -18,25 +18,33 @@
         <li class="sidebar-category">
             <span></span>
             <span class="hidden-sidebar-minimize">Modules</span>
-            <span class="pull-right"><i class="fa fa-coffee"></i></span>
+            <span class="pull-right"><i class="fa fa-cube"></i></span>
         </li>
             <!--/ End category Modules -->
 
         <!-- Start navigation - Organization Pages -->
+        <li>
+             <a  [routerLink]="['/dashboard-employee']">
+                <span class="icon"><i class="fa fa-desktop"></i></span>
+                <span class="text">Dashboard</span>
+               
+            </a>
+        </li>
         <li class="submenu">
+            
             <a>
-                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="icon"><i class="fa fa-university"></i></span>
                 <span class="text">Organization</span>
                 <span class="arrow"></span>
             </a>
             <ul>
-                <li><a [routerLink]="['/overview']">Overview</a></li>
-                <li><a [routerLink]="['/achievements']">Awards & Achievements</a></li>
-                <li><a [routerLink]="['/appreciation-letters']">Client Appreciation Letters</a></li>
-                <li><a [routerLink]="['/grading-status']">Grading Status</a></li>
-                <li><a [routerLink]="['/organization-chart']">Organization Chart</a></li>
-                <li *ngIf="false"><a href="">Activities</a></li>
-                <li *ngIf="false"><a href="">Special Announcements</a></li>
+                <li><a [routerLink]="['/overview']"><i class="fa fa-angle-double-right"></i> Overview</a></li>
+                <li><a [routerLink]="['/achievements']"><i class="fa fa-angle-double-right"></i> Awards & Achievements</a></li>
+                <li><a [routerLink]="['/appreciation-letters']"><i class="fa fa-angle-double-right"></i> Client Appreciation</a></li>
+                <li><a [routerLink]="['/grading-status']"><i class="fa fa-angle-double-right"></i> Grading Status</a></li>
+                <li><a [routerLink]="['/organization-chart']"><i class="fa fa-angle-double-right"></i> Organization Chart</a></li>
+                <li *ngIf="false"><a href=""><i class="fa fa-angle-double-right"></i> Activities</a></li>
+                <li *ngIf="false"><a href=""><i class="fa fa-angle-double-right"></i> Special Announcements</a></li>
             </ul>
         </li>
         <!--/ End navigation - Organization Pages -->
@@ -44,15 +52,15 @@
         <!-- Start navigation - Employee Management -->
         <li class="submenu">
             <a>
-                <span class="icon"><i class="fa fa-home"></i></span>
-                <span class="text">Employee Management</span>
+                <span class="icon"><i class="fa fa-users"></i></span>
+                <span class="text">Employee Manage</span>
                 <span class="arrow"></span>
             </a>
             <ul>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-employee']">Add Employee</a></li>
-                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/dashboard-employee']">Employee Dashboard</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/attendance-report']">Attendance Report</a></li>
-                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/vacation']">Vacations</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-employee']"><i class="fa fa-angle-double-right"></i> Add Employee</a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/dashboard-employee']"><i class="fa fa-angle-double-right"></i> Employee Dashboard</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/attendance-report']"><i class="fa fa-angle-double-right"></i> Attendance Report</a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/vacation']"><i class="fa fa-angle-double-right"></i> Vacations</a></li>
             </ul>
         </li>
         <!--/ End navigation - Employee Management -->
@@ -60,17 +68,17 @@
         <!-- Start navigation - Site Management -->
         <li class="submenu">
             <a>
-                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="icon"><i class="fa fa-exchange"></i></span>
                 <span class="text">Site Management</span>
                 <span class="arrow"></span>
             </a>
             <ul>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-site']">Add Site</a></li>
-                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/dashboard-site']">Site Dashboard</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/client-satisfaction']">Client Satisfactory Report</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/clocking-report']">Clocking Report</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/occurrence-book']">Occurrence Book</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/backfill']">Back Fill</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-site']"><i class="fa fa-angle-double-right"></i> Add Site</a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/dashboard-site']"><i class="fa fa-angle-double-right"></i> Site Dashboard</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/client-satisfaction']"><i class="fa fa-angle-double-right"></i> Client Satisfactory</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/clocking-report']"><i class="fa fa-angle-double-right"></i> Clocking Report</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/occurrence-book']"><i class="fa fa-angle-double-right"></i> Occurrence Book</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/backfill']"><i class="fa fa-angle-double-right"></i> Back Fill</a></li>
             </ul>
         </li>
         <!--/ End navigation - Site Management -->
@@ -78,13 +86,13 @@
         <!-- Start navigation - Deployment Management -->
         <li class="submenu">
             <a>
-                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="icon"><i class="fa fa-bar-chart"></i></span>
                 <span class="text">Deployment Chart</span>
                 <span class="arrow"></span>
             </a>
             <ul>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-deployment']">Add Deployment Chart</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/dashboard-deployment']">Deployment Dashboard</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-deployment']"><i class="fa fa-angle-double-right"></i> Add Deployment Chart</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/dashboard-deployment']"><i class="fa fa-angle-double-right"></i> Deployment Dashboard</a></li>
             </ul>
         </li>
         <!--/ End navigation - Deployment Management -->
@@ -92,41 +100,59 @@
         <!-- Start navigation - Reports -->
         <li class="submenu">
             <a>
-                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="icon"><i class="fa fa-file-o"></i></span>
                 <span class="text">Reports</span>
                 <span class="arrow"></span>
             </a>
             <ul>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/after-action-review']">After Action Review</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/daily-checklist']">Daily Checklist</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/fire-incident']">Fire Incident</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/incident-report']">Incident Report</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/job-appraisal']">Job Appraisal</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/lost-and-found']">Lost and Found</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/officer-feedback']">Officer Feedback</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/on-job-training']">On Job Training</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/operation-visit']">Operation Visit</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/performance-evaluation']">Performance Evaluation</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/refresher-training']">Refresher Training</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/shift-supervisor-checklist']">Shift Supervisor Checklist</a></li>
-                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/site-visit']">Site Visit</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/after-action-review']"><i class="fa fa-angle-double-right"></i> After Action Review</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/daily-checklist']"><i class="fa fa-angle-double-right"></i> Daily Checklist</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/fire-incident']"><i class="fa fa-angle-double-right"></i> Fire Incident</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/incident-report']"><i class="fa fa-angle-double-right"></i> Incident Report</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/job-appraisal']"><i class="fa fa-angle-double-right"></i> Job Appraisal</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/lost-and-found']"><i class="fa fa-angle-double-right"></i> Lost and Found</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/officer-feedback']"><i class="fa fa-angle-double-right"></i> Officer Feedback</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/on-job-training']"><i class="fa fa-angle-double-right"></i> On Job Training</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/operation-visit']"><i class="fa fa-angle-double-right"></i> Operation Visit</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/performance-evaluation']"><i class="fa fa-angle-double-right"></i> Performance Evaluation</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/refresher-training']"><i class="fa fa-angle-double-right"></i> Refresher Training</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/shift-supervisor-checklist']"><i class="fa fa-angle-double-right"></i> Shift Supervisor Checklist</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/site-visit']"><i class="fa fa-angle-double-right"></i> Site Visit</a></li>
             </ul>
         </li>
         <!--/ End navigation - Reports -->
+          
+
+
+            <li class="submenu">
+            <a>
+                <span class="icon"><i class="fa fa-cog"></i></span>
+                <span class="text">Operations</span>
+                <span class="arrow"></span>
+            </a>
+            <ul>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/add-employee']"><i class="fa fa-angle-double-right"></i> Course Management </a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/dashboard-employee']"><i class="fa fa-angle-double-right"></i>  E - Learning Management</a></li>
+                <li *ngIf="isAdmin || isOE"><a [routerLink]="['/attendance-report']"><i class="fa fa-angle-double-right"></i> Referesher Training</a></li>
+                <li *ngIf="isAdmin || isOE || isSO"><a [routerLink]="['/vacation']"><i class="fa fa-angle-double-right"></i> Onjob Training</a></li>
+            </ul>
+        </li>
+
+
 
         <!-- Start navigation - HR Bay -->
         <li class="submenu">
             <a>
-                <span class="icon"><i class="fa fa-home"></i></span>
+                <span class="icon"><i class="fa fa-refresh"></i></span>
                 <span class="text">HR Bay</span>
                 <span class="arrow"></span>
             </a>
             <ul>
-                <li *ngIf="isAdmin"><a [routerLink]="['/salary-report']">Salary Report</a></li>
-                <li *ngIf="isAdmin"><a [routerLink]="['/salary']">Salary Details</a></li>
-                <li *ngIf="isAdmin"><a [routerLink]="['/holidays']">Public Holidays</a></li>
-                <li *ngIf="isAdmin"><a [routerLink]="['/vacation-report']">Vacation Report</a></li>
-                <li *ngIf="isAdmin"><a [routerLink]="['/vacation-balance']">Vacation Balance</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/salary-report']"><i class="fa fa-angle-double-right"></i> Salary Report</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/salary']"><i class="fa fa-angle-double-right"></i> Salary Details</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/holidays']"><i class="fa fa-angle-double-right"></i> Public Holidays</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/vacation-report']"><i class="fa fa-angle-double-right"></i> Vacation Report</a></li>
+                <li *ngIf="isAdmin"><a [routerLink]="['/vacation-balance']"><i class="fa fa-angle-double-right"></i> Vacation Balance</a></li>
                 <li *ngIf="isAdmin" class="submenu">
                     <a>
                         <span class="text">E Learning</span>
@@ -152,12 +178,22 @@
             </ul>
         </li>
         <!--/ End navigation - HR Bay -->
+          
+
+             <li>
+             <a  [routerLink]="['/dashboard-employee']">
+                <span class="icon"><i class="fa fa-user"></i></span>
+                <span class="text">User Management</span>
+               
+            </a>
+        </li>
+
 
         <!-- Start category documentation -->
         <li class="sidebar-category">
             <span></span>
             <span class="hidden-sidebar-minimize">Documentation</span>
-            <span class="pull-right"><i class="fa fa-coffee"></i></span>
+            <span class="pull-right"><i class="fa fa-file"></i></span>
         </li>
         <!--/ End category documentation -->
 
