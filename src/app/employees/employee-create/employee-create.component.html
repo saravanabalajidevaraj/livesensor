@@ -1,8 +1,12 @@
 <section id="page-content">
     <div class="body-content animated fadeIn">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
+            <!-- <div class="col-md-2"></div> -->
+            <div class="col-md-12">
+
+              
+                   <h2 class="tophs">Add Employee</h2>
+
                 <div class="panel rounded shadow no-overflow">
                     <div class="panel-body no-padding">
                 		<div class="form-horizontal form-bordered">
@@ -12,23 +16,30 @@
                                 </div>
                             </div>
                 			<div class="form-body">
-                                <div [class]="['form-group' + (firstNameError ? ' has-error' : '')]">
+                               
+                               <div class="row inlineform">
+                                <div [class]="['form-group f1' + (firstNameError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">First Name <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
-                                        <input type="text" [(ngModel)]="firstName" class="form-control rounded">
+                                        <input type="text" [(ngModel)]="firstName"  class="form-control rounded">
                                         <div *ngIf="firstNameError" class="text-right"><code>{{firstNameError}}</code></div>
                                     </div>
                                 </div>
-                                <div [class]="['form-group' + (lastNameError ? ' has-error' : '')]">
+                                <div [class]="['form-group  f2' + (lastNameError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Last Name <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
-                                        <input type="text" [(ngModel)]="lastName" class="form-control rounded">
+                                        <input type="text" [(ngModel)]="lastName"  class="form-control rounded">
                                         <div *ngIf="lastNameError" class="text-right"><code>{{lastNameError}}</code></div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+
+                            </div>
+
+                              <div class="row inlineform">
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Gender</label>
                                     <div class="col-sm-7">
@@ -38,7 +49,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div [class]="['form-group' + (lastNameError ? ' has-error' : '')]">
+                                <div [class]="['form-group f2' + (lastNameError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Date Of Birth <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -46,21 +57,31 @@
                                         <div *ngIf="dobError" class="text-right"><code>{{dobError}}</code></div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+
+                              <div class="row inlineform">
+
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
-                                    <label class="col-sm-3 control-label text-left">Mobile Number</label>
+                                    <label class="col-sm-3 control-label text-left">Mobile</label>
                                     <div class="col-sm-7">
                                         <input type="tel" [(ngModel)]="phone" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Address</label>
                                     <div class="col-sm-7">
                                         <textarea [(ngModel)]="address" class="form-control rounded"></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+                              <div class="row inlineform">
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Marital Status</label>
                                     <div class="col-sm-7">
@@ -70,7 +91,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Nationality</label>
                                     <div class="col-sm-7">
@@ -80,12 +101,18 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                </div>
+
                 				<div class="form-group form-group-divider">
                 					<div class="form-inner">
                 						<h3 class="no-margin">Professional</h3>
                 					</div>
                 				</div>
-                                <div [class]="['form-group' + (staffError ? ' has-error' : '')]">
+
+                                  <div class="row inlineform">
+
+                                <div [class]="['form-group f1' + (staffError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Staff Id <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -93,7 +120,7 @@
                                         <div *ngIf="staffError" class="text-right"><code>{{staffError}}</code></div>
                                     </div>
                                 </div>
-                                <div [class]="['form-group' + (designationError ? ' has-error' : '')]">
+                                <div [class]="['form-group f2' + (designationError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Designation <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -104,14 +131,19 @@
                                         <div *ngIf="designationError" class="text-right"><code>{{designationError}}</code></div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+
+                              <div class="row inlineform">
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">PWM Grade</label>
                                     <div class="col-sm-7">
                                         <input type="text" [(ngModel)]="pwmGrade" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div [class]="['form-group' + (deploymentGradeError ? ' has-error' : '')]">
+                                <div [class]="['form-group f2' + (deploymentGradeError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Deployment Grade <span *ngIf="role === 'SO'" class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -119,14 +151,19 @@
                                         <div *ngIf="deploymentGradeError" class="text-right"><code>{{deploymentGradeError}}</code></div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+
+                              <div class="row inlineform">
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Joining Date</label>
                                     <div class="col-sm-7">
                                         <input type="date" [(ngModel)]="joinDate" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div [class]="['form-group' + (confirmError ? ' has-error' : '')]">
+                                <div [class]="['form-group f2' + (confirmError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Confirmation Date <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -134,28 +171,39 @@
                                         <div *ngIf="confirmError" class="text-right"><code>{{confirmError}}</code></div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+
+                              <div class="row inlineform">
+
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">WP Issue Date</label>
                                     <div class="col-sm-7">
                                         <input type="date" [(ngModel)]="wpIssuedDate" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">WP Expiry Date</label>
                                     <div class="col-sm-7">
                                         <input type="date" [(ngModel)]="wpExpiryDate" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                            </div>
+
+
+                              <div class="row inlineform">
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Bank Account</label>
                                     <div class="col-sm-7">
                                         <input type="text" [(ngModel)]="account" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Courses Done</label>
                                     <div class="col-sm-7">
@@ -175,12 +223,21 @@
                                         </table>
                                     </div>
                                 </div>
+
+
+
+                            </div>
+
+
                 				<div class="form-group form-group-divider">
                 					<div class="form-inner">
                 						<h3 class="no-margin">Official</h3>
                 					</div>
                 				</div>
-                                <div [class]="['form-group' + (userNameError ? ' has-error' : '')]">
+
+                                 <div class="row inlineform">
+
+                                <div [class]="['form-group f1' + (userNameError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">User Name <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -188,7 +245,7 @@
                                         <div *ngIf="userNameError" class="text-right"><code>{{userNameError}}</code></div>
                                     </div>
                                 </div>
-                                <div [class]="['form-group' + (passwordError ? ' has-error' : '')]">
+                                <div [class]="['form-group f2' + (passwordError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Password <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -196,7 +253,12 @@
                                         <div *ngIf="lastNameError" class="text-right"><code>{{passwordError}}</code></div>
                                     </div>
                                 </div>
-                                <div [class]="['form-group' + (roleError ? ' has-error' : '')]">
+
+                               </div>
+
+                                 <div class="row inlineform">
+
+                                <div [class]="['form-group f1' + (roleError ? ' has-error' : '')]">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">App Role <span class="asterisk">*</span></label>
                                     <div class="col-sm-7">
@@ -207,21 +269,27 @@
                                         <div *ngIf="roleError" class="text-right"><code>{{roleError}}</code></div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Profile Picture</label>
                                     <div class="col-sm-7">
                                         <input type="file" (change)="[this.profileImage = $event.target.files[0]]" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+
+                             <div class="row inlineform">
+
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Employment Contract</label>
                                     <div class="col-sm-7">
                                         <input type="file" (change)="[this.empContract = $event.target.files[0]]" class="form-control rounded" accept=".pdf,.doc,.docx">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Uniform Issue Status</label>
                                     <div class="col-sm-7">
@@ -232,41 +300,65 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+
+                            </div>
+
+                             <div class="row inlineform">
+
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">NOK</label>
                                     <div class="col-sm-7">
                                         <input type="text" [(ngModel)]="nok" class="form-control rounded" >
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Notification Add Date</label>
                                     <div class="col-sm-7">
                                         <input type="date" [(ngModel)]="notificationAddDate" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+
+
+                             <div class="row inlineform">
+
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Notification Cancel Date</label>
                                     <div class="col-sm-7">
                                         <input type="date" [(ngModel)]="notificationCancelDate" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group f2">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Resignation Date</label>
                                     <div class="col-sm-7">
                                         <input type="date" [(ngModel)]="resignationDate" class="form-control rounded">
                                     </div>
                                 </div>
-                                <div class="form-group">
+
+                            </div>
+                             
+
+                              <div class="row inlineform">
+
+                                <div class="form-group f1">
                                     <div class="col-sm-1"></div>
                                     <label class="col-sm-3 control-label text-left">Termination Date</label>
                                     <div class="col-sm-7">
                                         <input type="date" [(ngModel)]="terminationDate" class="form-control rounded">
                                     </div>
                                 </div>
+
+                            </div>
+
+
                 			</div>
                 		</div>
                 	</div>

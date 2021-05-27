@@ -1,1 +1,65 @@
 /* here you can put your own css to customize and override the theme */
+
+.form-group.form-group-divider .form-inner {
+    border-left: 5px solid #bdae64!important;
+    font-family: 'Montserrat';
+    color: #343434;
+   
+}
+
+.inlineform {
+	border-top: 1px solid #dddddd;
+	    margin-left: 0px;
+    margin-right: 0px;
+}
+.inlineform .f1,.inlineform .f2{
+	border-top: 0px!important;
+}
+
+.inlineform .f1{
+    float: left;
+    width: 50%;
+}
+
+.inlineform .f2{
+    float: right;
+     width: 50%;
+}
+
+.inlineform .control-label{
+	color: #000!important;
+	font-family: 'Poppins'
+
+}
+
+
+
+
+
+.tophs{
+font-size: 28px;
+    font-family: 'Montserrat';
+    color: #343434;
+    text-align: center;
+    margin-bottom: 25px;
+} 
+
+
+/*.inlineform ::placeholder { 
+  color: red!important;
+  opacity: 1;
+}*/
+
+.inlineform input[type="text"],.inlineform input[type="password"],.inlineform input[type="datetime"],.inlineform input[type="datetime-local"],.inlineform input[type="date"],.inlineform input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"],.inlineform input[type="url"],.inlineform input[type="search"],.inlineform input[type="tel"],.inlineform input[type="color"],.inlineform textarea,.inlineform select{
+	font-family: 'Poppins';
+	color: #000000a3!important;
+}
+
+
+
+.btn-primary {
+    background-color: #7b1418;
+    border-color: #460e10;
+    color: white;
+    font-family: 'Poppins';
+}

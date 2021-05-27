@@ -47,14 +47,14 @@
  * HEADER
  * ======================================================================== */
 body.page-sidebar-minimize #header .navbar-minimize > a {
-  background-color: #2b333e;
+  background-color: #333!important;
   color: #ffffff;
 }
 body.page-sidebar-minimize #header .navbar-minimize:hover > a {
-  background-color: #71a117;
+  background-color: #2b2626;
 }
 #header .navbar-header {
-      background-color: #7b1418;
+     background-color: #7b1418;
       border-bottom: 1px solid #222933;
 }
 /* ========================================================================
@@ -273,7 +273,7 @@ textarea:focus {
   left: 0px;
   top: 0px;
   bottom: 0px;
-  border-left: 3px solid #71a117;
+  border-left: 3px solid #bcaf63;
 }
 /* ========================================================================
  * LIST GROUP

@@ -13,7 +13,7 @@
                 </li>
             </ul>
 		</div>
-        <div *ngIf="users.size && (isOE || isAdmin)" class="pull-right">
+        <div *ngIf="users.size && (isOE || isAdmin)" class="pull-right vacationhead">
             <div class="form-group no-margin">
                 <select (change)="changeUser(userFor($event.target.value))" class="form-control rounded">
                     <option *ngFor="let x of userIds" [value]="x" [selected]="x === user._id">{{userName(x)}}</option>

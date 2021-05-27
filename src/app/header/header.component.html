@@ -14,7 +14,7 @@
 
              <!-- Start brand -->
              <a class="navbar-brand" href="dashboard.html" style="margin:4px auto">
-                    <img class="logo" src="assets/img/lssLogo.jpg" alt="Brand Logo" style="width: 113px;">
+                    <img class="logo" src="assets/img/LSShead.jpg" alt="Brand Logo" style="width: 230px;">
             </a><!-- /.navbar-brand -->
             <!--/ End brand -->
 
@@ -59,7 +59,7 @@
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span *ngIf="list.length > 0"class="rounded count label label-danger">{{list.length}}</span>
+                        <span *ngIf="list.length > 0"class="rounded bellalert counst label label-danger">{{list.length}}</span>
                     </a>
 
                     <!-- Start dropdown menu -->
@@ -104,7 +104,7 @@
                         <li><a [routerLink]="['/dashboard-employee']"><i class="fa fa-user"></i>View profile</a></li>
                         <li><a (click)="triggerImageSelect()"><i class="fa fa-upload"></i>Upload Photo</a></li>
                         <li class="divider"></li>
-                        <li><a [routerLink]="['/login']"><i class="fa fa-sign-out"></i>Logout</a></li>
+                        <li ><a [routerLink]="['/login']" style="background: #d8d8d8;"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </ul>
                     <input #imageSelect (change)="uploadImage($event.target.files[0])" accept=".jpeg,.jpg,.png" type="file" style="display:none">
                     <!--/ End dropdown menu -->
