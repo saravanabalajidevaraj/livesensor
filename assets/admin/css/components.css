@@ -2242,7 +2242,7 @@ ul.days li span {
 .btn-success.active,
 .btn-success[disabled],
 .btn-success.disabled {
-  background-color: #7fb842;
+  background-color: #7b1418;
   border-color: transparent;
   color: white;
 }
@@ -4592,10 +4592,11 @@ form .form-group.form-group-divider {
   margin-bottom: 0px;
 }
 form .form-group.form-group-divider .form-inner {
-  border-left: 5px solid #71a117;
+ border-left: 5px solid #baad61!important;
   padding-left: 15px;
   padding-top: 15px;
   padding-bottom: 15px;
+  font-family: 'Montserrat'!important;
 }
 form .form-group.form-footer {
   background-color: #eeeeee;
@@ -5606,6 +5607,7 @@ input.spinner[type="color"].flat {
 .panel .panel-heading .panel-title {
   padding: 5px 5px;
   font-size: 17px;
+  font-family: 'Montserrat';
 }
 .panel .panel-heading .panel-title > i {
   margin-right: 5px;
@@ -5647,6 +5649,7 @@ input.spinner[type="color"].flat {
 }
 .panel .panel-body .table-responsive {
   margin-top: -1px;
+  padding: 8px;
 }
 .panel .panel-body.out {
   display: none;
@@ -5675,6 +5678,8 @@ input.spinner[type="color"].flat {
 }
 .panel .panel-body table {
   margin-bottom: 0px;
+  /* padding: 24px; */
+  /* margin: 0px; */
 }
 .panel .panel-body table thead tr th {
   -webkit-border-radius: 0px;
@@ -6883,9 +6888,10 @@ table.dataTable thead .sorting_desc_disabled {
   color: white;
 }
 .table-lilac thead tr th {
-  background-color: #906094 !important;
-  border-color: #9c6da0 #9c6da0 #7b527e !important;
+  background-color: #333333 !important;
+  border-color: #343434 #eeeded #484747 !important;
   color: #fff;
+  font-family: 'Montserrat';
 }
 .table-lilac tbody tr td.sorting_1 {
   background: #ad86b0 !important;
@@ -7508,8 +7514,8 @@ table.dataTable thead .sorting_desc_disabled {
   background-color: #72a53b;
 }
 .bg-info {
-  background-color: #63d3e9 !important;
-  border: 1px solid #63d3e9;
+  background-color: #333333 !important;
+  border: 1px solid #828282;
   color: white;
 }
 .bg-info a,
@@ -8247,4 +8253,39 @@ table.dataTable thead .sorting_desc_disabled {
 #back-top i {
   font-size: 20px;
   line-height: 35px;
+}
+
+/*****custom css****/
+
+
+
+.panel b{
+    font-family: 'Montserrat';
+    letter-spacing: 1px;
+
+    }
+.panel ul li
+    {
+          padding: 8px 2px;
+    }
+    .panel p ,.panel ul li
+
+    {
+        font-family: 'Poppins';
+    }
+.panel ul
+{
+      margin-left: 20px;
+}
+
+
+.btnsv{
+  background: #7b1418!important;
+  font-family: 'Poppins';
+  border-color: #c7343a;
+}
+
+.vacationhead
+{
+  margin-top: 11px!important;
 }
